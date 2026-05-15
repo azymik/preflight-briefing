@@ -249,7 +249,7 @@
       // Load data from info.json when the page loads
       window.onload = async () => {
         try {
-          const response = await fetch("info.json");
+          const response = await fetch('info.json?t=' + new Date().getTime(), { cache: 'no-store' });
 
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
