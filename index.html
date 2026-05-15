@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pilot Preflight Briefing</title>
+    <style>
+      :root {
+        --primary: #0056b3;
+        --bg-color: #f4f7f6;
+        --card-bg: #ffffff;
+        --border: #ddd;
+        --text-main: #333;
+        --text-muted: #666;
+      }
+
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: var(--bg-color);
+        color: var(--text-main);
+      }
+
+      header {
+        background-color: var(--primary);
+        color: white;
+        padding: 1rem;
+        text-align: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .container {
+        padding: 1rem;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+
+      /* Setup View Styles */
+      #setup-view {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .sequence-list {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .sequence-item {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        padding: 0.75rem;
+        margin-bottom: 0.5rem;
+        border-radius: 8px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      }
+
+      .controls button {
+        background: #eee;
+        border: none;
+        padding: 0.5rem 1rem;
+        margin-left: 0.25rem;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .controls button:active {
+        background: #ccc;
+      }
+
+      .btn-primary {
+        background-color: var(--primary);
+        color: white;
+        border: none;
+        padding: 1rem;
+        width: 100%;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 1rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Briefing View Styles */
+      #briefing-view {
+        display: none;
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .section-title {
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 0.5rem;
+        margin-top: 0;
+      }
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .card-header h3 {
+        margin: 0;
+        color: var(--primary);
+      }
+
+      .info-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        margin-bottom: 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .info-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .tag {
+        display: inline-block;
+        background: #e9ecef;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        margin: 0.2rem;
+      }
+
+      /* Scrollable NOTAMs Box */
+      .notams-container {
+        background: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 0.5rem;
+        max-height: 250px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+      }
+
+      .notam-item {
+        padding: 0.5rem;
+        border-bottom: 1px solid #eee;
+        font-size: 0.95rem;
+      }
+
+      .notam-item:last-child {
+        border-bottom: none;
+      }
+
+      .notam-number {
+        font-weight: bold;
+        color: #d9534f;
+        display: block;
+        margin-bottom: 0.25rem;
+      }
+
+      .btn-back {
+        background: transparent;
+        color: white;
+        border: 1px solid white;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+        position: absolute;
+        left: 1rem;
+        top: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <button
+        id="btn-back"
+        class="btn-back"
+        style="display: none"
+        onclick="showSetup()"
+      >
+        Back
+      </button>
+      <h2 style="margin: 0">Preflight Briefing</h2>
+    </header>
+
+    <div class="container">
+      <!-- SETUP VIEW -->
+      <div id="setup-view">
+        <div>
+          <h2>Select & Sequence Airports</h2>
+          <p style="color: var(--text-muted); font-size: 0.9rem">
+            Check to include. Use arrows to sequence.
+          </p>
+          <ul id="airports-list" class="sequence-list"></ul>
+        </div>
+
+        <div>
+          <h2>Select & Sequence FIRs</h2>
+          <ul id="firs-list" class="sequence-list"></ul>
+        </div>
+
+        <button class="btn-primary" onclick="generateBriefing()">
+          Generate Briefing
+        </button>
+      </div>
+
+      <!-- BRIEFING VIEW -->
+      <div id="briefing-view">
+        <div id="briefing-airports">
+          <h2 class="section-title">Airports</h2>
+          <div id="airports-content"></div>
+        </div>
+
+        <div id="briefing-firs">
+          <h2 class="section-title">Flight Information Regions (FIRs)</h2>
+          <div id="firs-content"></div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // State Objects containing original data + selected flag
+      let appState = {
+        airports: [],
+        firs: [],
+      };
+
+      // Load data from info.json when the page loads
+      window.onload = async () => {
+        try {
+          const response = await fetch("info.json");
+
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+
+          const briefingData = await response.json();
+
+          // Initialize state with selected: true
+          appState.airports = briefingData.airports.map((a) => ({
+            ...a,
+            selected: true,
+          }));
+          appState.firs = briefingData.firs.map((f) => ({
+            ...f,
+            selected: true,
+          }));
+
+          // Render the UI
+          renderSetupList("airports");
+          renderSetupList("firs");
+        } catch (error) {
+          console.error("Failed to load info.json:", error);
+          document.getElementById("setup-view").innerHTML = `
+                <div style="background: #fee; padding: 1rem; border: 1px solid #f99; border-radius: 8px;">
+                    <h3 style="color: #c00; margin-top:0;">Error loading data</h3>
+                    <p>Could not load <strong>info.json</strong>. Ensure the file is in the same folder as index.html.</p>
+                    <p><small>Note: Browsers block local file fetching for security. This will work perfectly on GitHub Pages, but if testing locally on your computer, you need to use a local web server (like VS Code Live Server).</small></p>
+                </div>
+            `;
+        }
+      };
+
+      function renderSetupList(type) {
+        const listEl = document.getElementById(`${type}-list`); // Ensure HTML uses ids "airports-list" and "firs-list"
+        listEl.innerHTML = "";
+
+        appState[type].forEach((item, index) => {
+          const li = document.createElement("li");
+          li.className = "sequence-item";
+
+          li.innerHTML = `
+                <div>
+                    <input type="checkbox" id="${type}-${index}" ${item.selected ? "checked" : ""} 
+                           onchange="toggleSelection('${type}', ${index})">
+                    <label for="${type}-${index}" style="font-weight:bold; margin-left:10px;">${item.ICAO} - ${item.Name}</label>
+                </div>
+                <div class="controls">
+                    <button onclick="moveItem('${type}', ${index}, -1)" ${index === 0 ? "disabled" : ""}>&#8593;</button>
+                    <button onclick="moveItem('${type}', ${index}, 1)" ${index === appState[type].length - 1 ? "disabled" : ""}>&#8595;</button>
+                </div>
+            `;
+          listEl.appendChild(li);
+        });
+      }
+
+      function toggleSelection(type, index) {
+        appState[type][index].selected = !appState[type][index].selected;
+      }
+
+      function moveItem(type, index, direction) {
+        const targetIndex = index + direction;
+        if (targetIndex < 0 || targetIndex >= appState[type].length) return;
+
+        // Swap elements
+        const temp = appState[type][index];
+        appState[type][index] = appState[type][targetIndex];
+        appState[type][targetIndex] = temp;
+
+        renderSetupList(type);
+      }
+
+      function generateBriefing() {
+        document.getElementById("setup-view").style.display = "none";
+        document.getElementById("briefing-view").style.display = "flex";
+        document.getElementById("btn-back").style.display = "block";
+
+        renderBriefingSection("airports", "airports-content");
+        renderBriefingSection("firs", "firs-content");
+      }
+
+      function showSetup() {
+        document.getElementById("setup-view").style.display = "flex";
+        document.getElementById("briefing-view").style.display = "none";
+        document.getElementById("btn-back").style.display = "none";
+      }
+
+      function renderBriefingSection(type, containerId) {
+        const container = document.getElementById(containerId);
+        container.innerHTML = "";
+
+        const selectedItems = appState[type].filter((item) => item.selected);
+
+        if (selectedItems.length === 0) {
+          container.innerHTML = "<p>No items selected.</p>";
+          return;
+        }
+
+        selectedItems.forEach((item) => {
+          const card = document.createElement("div");
+          card.className = "card";
+
+          // Build Base HTML
+          let html = `
+                <div class="card-header">
+                    <h3>${item.ICAO} - ${item.Name}</h3>
+                </div>
+                <div class="info-grid">
+            `;
+
+          // If it's an airport, add runways and approaches
+          if (type === "airports") {
+            html += `<div><strong>Runways:</strong><br>`;
+            item.Runways.forEach(
+              (r) => (html += `<span class="tag">${r}</span>`),
+            );
+            html += `</div><div><strong>Approaches:</strong><br>`;
+            if (
+              item.Available_Approaches &&
+              item.Available_Approaches.length > 0
+            ) {
+              item.Available_Approaches.forEach((app) => {
+                html += `<span class="tag"><b>${app.RWY}:</b> ${app.APPs.join(", ")}</span>`;
+              });
+            } else {
+              html += `<span class="tag" style="background:#ffdada">No Data/Charts</span>`;
+            }
+            html += `</div>`;
+          }
+          html += `</div>`; // Close info grid
+
+          // Add NOTAMS in a scrollable container
+          html += `<strong>NOTAMs (${item.NOTAMS ? item.NOTAMS.length : 0}):</strong>`;
+          html += `<div class="notams-container">`;
+
+          if (item.NOTAMS && item.NOTAMS.length > 0) {
+            // Handle spelling variations in your JSON ("Relation", "Ralation", "relation")
+            item.NOTAMS.forEach((notam) => {
+              const num = notam.Number || notam.number;
+              const rel =
+                notam.Relation ||
+                notam.relation ||
+                notam.Ralation ||
+                "No remarks";
+              html += `
+                        <div class="notam-item">
+                            <span class="notam-number">${num}</span>
+                            <span>${rel}</span>
+                        </div>
+                    `;
+            });
+          } else {
+            html += `<div class="notam-item">No active NOTAMs recorded.</div>`;
+          }
+          html += `</div>`;
+
+          card.innerHTML = html;
+          container.appendChild(card);
+        });
+      }
+    </script>
+  </body>
+</html>
