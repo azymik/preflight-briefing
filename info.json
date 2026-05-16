@@ -29,7 +29,7 @@
         },
         {
           "Number": "O9/26",
-          "Ralation": "Take note"
+          "Ralation": ""
         },
         {
           "Number": "A1191/26",
@@ -202,10 +202,6 @@
       ],
       "NOTAMS": [
         {
-          "Number": "A599/26",
-          "Relation": "Still has RNAV approach"
-        },
-        {
           "number": "A566/26",
           "relation": "Still has RNAV approach"
         },
@@ -259,7 +255,7 @@
         },
         {
           "Number": "A68/26",
-          "Relation": "Has LNAV/VNAV DA, ILS U/S (A599/26-END 15 MAY 2026 -23:55)"
+          "Relation": "Has LNAV/VNAV DA"
         },
         {
           "Number": "A9/26",
@@ -307,23 +303,12 @@
           "Relation": "SID S bound"
         },
         {
-          "Number": "A1131/26-A1132/26",
-          "Relation": "Still has RNAV approach"
-        },
-        {
-          "Number": "A1126/26-A1127/26",
-          "Relation": "RWY CLSD (A1085/26-END 15 MAY 2026 - 13:00)"
-        },
-        {
-          "Number": "A1085/26",
-          "Relation": ""
-        },
-        {
           "Number": "A1125/26",
           "Relation": "last high speed exit TWY from 34L"
         },
         {
           "Number": "A1122/26",
+
           "Relation": "S of south satellite apron, our wingspan 212 ft 5 in"
         },
         {
@@ -337,18 +322,6 @@
         {
           "Number": "A1086/26",
           "Relation": "first high speed exit TWY from 16C"
-        },
-        {
-          "Number": "A1015/26",
-          "Relation": "Still has LOC & RNAV approach"
-        },
-        {
-          "Number": "A1017/26",
-          "Relation": "Still has RNAV approach"
-        },
-        {
-          "Number": "A1013/26",
-          "Relation": "Still has RNAV approach"
         },
         {
           "Number": "A985/26-A990/26",
@@ -372,7 +345,7 @@
         },
         {
           "Number": "A909/26",
-          "Relation": "ILS 34C U/S (A1017/26-END 15 MAY 2026 - 23:59), 34 ft higher"
+          "Relation": "34 ft higher"
         },
         {
           "Number": "A908/26",
@@ -380,7 +353,7 @@
         },
         {
           "Number": "A905/26",
-          "Relation": "Still can do standard CAT I, GP U/S (A1015/26-END 15 MAY 2026 - 23:59)"
+          "Relation": "Still can do standard CAT I"
         },
         {
           "Number": "A268/26-A284/26",
@@ -412,11 +385,11 @@
         },
         {
           "Number": "O46/24",
-          "Ralation": "Take note"
+          "Ralation": ""
         },
         {
           "Number": "A2033/24",
-          "Ralation": "Chart: DME or RADAR required, ILS 34C U/S (A1017/26-END 15 MAY 2026 - 23:59)"
+          "Ralation": "Chart: DME or RADAR required"
         }
       ]
     },
