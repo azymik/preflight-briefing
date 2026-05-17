@@ -390,12 +390,19 @@
             item.NOTAMS.forEach((notam) => {
               const num = notam.Number;
               const rel = notam.Relation;
+              const end = notam.End;
+
+              let endBadge = "";
+              if (end !== "") {
+                endBadge = `<span style="background: #ffeeba; color: #856404; padding: 2px 6px; border-radius: 4px; font-size: 0.8rem; margin-left: 8px; font-weight: normal;">Ends: ${end}</span>`;
+              }
+
               html += `
-                        <div class="notam-item">
-                            <span class="notam-number">${num}</span>
-                            <span>${rel}</span>
-                        </div>
-                    `;
+        <div class="notam-item">
+            <span class="notam-number">${num} ${endBadge}</span>
+            <span style="display: block; margin-top: 4px;">${rel}</span>
+        </div>
+    `;
             });
           } else {
             html += `<div class="notam-item">No active NOTAMs recorded.</div>`;
