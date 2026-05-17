@@ -7,19 +7,19 @@
       "Available_Approaches": [
         {
           "RWY": "05L",
-          "APPs": ["ILS", "RNP"]
+          "APPs": ["ILS II", "RNP"]
         },
         {
           "RWY": "05R",
-          "APPs": ["ILS", "RNP"]
+          "APPs": ["ILS II", "RNP"]
         },
         {
           "RWY": "23L",
-          "APPs": ["ILS", "RNP"]
+          "APPs": ["ILS II", "RNP"]
         },
         {
           "RWY": "23R",
-          "APPs": ["ILS", "RNP"]
+          "APPs": ["ILS II", "RNP"]
         }
       ],
       "NOTAMS": [
@@ -115,27 +115,23 @@
       "Available_Approaches": [
         {
           "RWY": "08L",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS 3A", "RNAV", "VIS"]
         },
         {
           "RWY": "08R",
-          "APPs": ["ILS", "RNAV", "VIS"]
-        },
-        {
-          "RWY": "16R",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS 3A", "RNAV", "VIS"]
         },
         {
           "RWY": "13",
-          "APPs": ["ILS", "RNAV"]
+          "APPs": ["ILS I", "RNAV"]
         },
         {
           "RWY": "26L",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS 3A", "RNAV", "VIS"]
         },
         {
           "RWY": "26R",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS 3A", "RNAV", "VIS"]
         },
         {
           "RWY": "31",
@@ -200,11 +196,11 @@
       "Available_Approaches": [
         {
           "RWY": "10L",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS I", "RNAV", "VIS"]
         },
         {
           "RWY": "10R",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS 3", "RNAV", "VIS"]
         },
         {
           "RWY": "21",
@@ -212,15 +208,11 @@
         },
         {
           "RWY": "28L",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS I", "RNAV", "VIS"]
         },
         {
           "RWY": "28R",
-          "APPs": ["ILS", "RNAV", "VIS"]
-        },
-        {
-          "RWY": "34R",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS I", "RNAV", "VIS"]
         }
       ],
       "NOTAMS": [
@@ -313,27 +305,27 @@
       "Available_Approaches": [
         {
           "RWY": "16C",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS 3", "RNAV", "VIS"]
         },
         {
           "RWY": "16L",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS 3", "RNAV", "VIS"]
         },
         {
           "RWY": "16R",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS 3", "RNAV", "VIS"]
         },
         {
           "RWY": "34C",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS S2", "RNAV", "VIS"]
         },
         {
           "RWY": "34L",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS S2", "RNAV", "VIS"]
         },
         {
           "RWY": "34R",
-          "APPs": ["ILS", "RNAV", "VIS"]
+          "APPs": ["ILS S2", "RNAV", "VIS"]
         }
       ],
       "NOTAMS": [
@@ -466,7 +458,7 @@
       "Available_Approaches": [
         {
           "RWY": "12",
-          "APPs": ["ILS", "RNAV", "VOR"]
+          "APPs": ["ILS I", "RNAV", "VOR"]
         },
         {
           "RWY": "30",
@@ -513,15 +505,15 @@
       "Available_Approaches": [
         {
           "RWY": "07L",
-          "APPs": ["ILS", "RNAV"]
+          "APPs": ["ILS I", "RNAV"]
         },
         {
           "RWY": "07R",
-          "APPs": ["ILS", "RNAV"]
+          "APPs": ["ILS 3", "RNAV"]
         },
         {
           "RWY": "15",
-          "APPs": ["ILS", "RNAV"]
+          "APPs": ["ILS I", "RNAV"]
         },
         {
           "RWY": "25L",
@@ -593,11 +585,11 @@
       "Available_Approaches": [
         {
           "RWY": "09",
-          "APPs": ["ILS", "RNP", "NDB"]
+          "APPs": ["ILS I", "RNP", "NDB"]
         },
         {
           "RWY": "27",
-          "APPs": ["ILS", "RNP", "NDB"]
+          "APPs": ["ILS I", "RNP", "NDB"]
         }
       ],
       "NOTAMS": [
@@ -615,19 +607,19 @@
       "Available_Approaches": [
         {
           "RWY": "01L",
-          "APPs": ["ILS"]
+          "APPs": ["ILS I"]
         },
         {
           "RWY": "01R",
-          "APPs": ["ILS"]
+          "APPs": ["ILS I"]
         },
         {
           "RWY": "19L",
-          "APPs": ["ILS", "RNP", "VOR"]
+          "APPs": ["ILS I", "RNP", "VOR"]
         },
         {
           "RWY": "19R",
-          "APPs": ["ILS", "VOR"]
+          "APPs": ["ILS 3", "VOR"]
         }
       ],
       "NOTAMS": [
@@ -670,7 +662,7 @@
       "Available_Approaches": [
         {
           "RWY": "16L",
-          "APPs": ["ILS", "RNP", "VOR"]
+          "APPs": ["ILS I", "RNP", "VOR"]
         },
         {
           "RWY": "16R",
@@ -682,7 +674,7 @@
         },
         {
           "RWY": "34R",
-          "APPs": ["ILS", "RNP"]
+          "APPs": ["ILS I", "RNP"]
         }
       ],
       "NOTAMS": [
@@ -730,27 +722,27 @@
       "Available_Approaches": [
         {
           "RWY": "16L",
-          "APPs": ["ILS", "RNP", "VOR"]
+          "APPs": ["ILS I", "RNP", "VOR"]
         },
         {
           "RWY": "16R",
-          "APPs": ["ILS", "RNP", "VOR"]
+          "APPs": ["ILS I", "RNP", "VOR"]
         },
         {
           "RWY": "22",
-          "APPs": ["ILS", "LDA"]
+          "APPs": ["ILS I", "LDA"]
         },
         {
           "RWY": "23",
-          "APPs": ["ILS", "LDA"]
+          "APPs": ["ILS I", "LDA"]
         },
         {
           "RWY": "34L",
-          "APPs": ["ILS", "VOR"]
+          "APPs": ["ILS I", "VOR"]
         },
         {
           "RWY": "34R",
-          "APPs": ["ILS", "VIS"]
+          "APPs": ["ILS 3", "VIS"]
         }
       ],
       "NOTAMS": [
@@ -822,15 +814,15 @@
         },
         {
           "RWY": "18R",
-          "APPs": ["ILS", "RNP"]
+          "APPs": ["ILS I", "RNP"]
         },
         {
           "RWY": "36L",
-          "APPs": ["ILS", "RNP"]
+          "APPs": ["ILS I", "RNP"]
         },
         {
           "RWY": "36R",
-          "APPs": ["ILS", "RNP"]
+          "APPs": ["ILS I", "RNP"]
         }
       ],
       "NOTAMS": [
