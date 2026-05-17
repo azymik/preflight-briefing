@@ -382,6 +382,13 @@
           }
           html += `</div>`; // Close info grid
 
+          // --- NEW TAF SECTION ---
+          html += `<div style="margin-top: 1rem;">
+                            <strong>Latest TAF:</strong>
+                            <div id="taf-${item.ICAO}" style="font-family: monospace; font-size: 0.9rem; background: #e8f4fd; padding: 0.75rem; border-radius: 6px; border: 1px solid #b8daff; white-space: pre-wrap; margin-top: 0.25rem;">Fetching TAF...</div>
+                         </div>`;
+          // -----------------------
+
           // Add NOTAMS in a scrollable container
           html += `<strong>NOTAMs (${item.NOTAMS ? item.NOTAMS.length : 0}):</strong>`;
           html += `<div class="notams-container">`;
@@ -411,7 +418,40 @@
 
           card.innerHTML = html;
           container.appendChild(card);
+
+          // --- NEW TRIGGER ---
+          // If we just drew an airport, trigger the API fetch using its ICAO code
+          if (type === "airports") {
+            fetchTafData(item.ICAO);
+          }
+          // -------------------
         });
+      }
+      // Function to fetch and display TAF data from AviationWeather.gov
+      async function fetchTafData(icao) {
+        const tafElement = document.getElementById(`taf-${icao}`);
+        if (!tafElement) return;
+
+        try {
+          // Note: AWC recently updated their API URL to start with /api/data/
+          const response = await fetch(
+            `https://aviationweather.gov/api/data/taf?ids=${icao}`,
+          );
+          if (!response.ok) throw new Error("Network response was not ok");
+
+          const rawTafText = await response.text();
+
+          if (rawTafText.trim() === "") {
+            tafElement.innerHTML =
+              "<em style='color: #888;'>No active TAF published for this airport.</em>";
+          } else {
+            tafElement.textContent = rawTafText.trim();
+          }
+        } catch (error) {
+          console.error(`Error fetching TAF for ${icao}:`, error);
+          tafElement.innerHTML =
+            "<span style='color: #d9534f;'>Failed to load TAF. Check internet connection.</span>";
+        }
       }
     </script>
   </body>
