@@ -431,22 +431,28 @@
         });
       }
 
-      // Function to fetch and display TAF data from AviationWeather.gov
+      // Function to fetch and display TAF data from AviationWeather.gov via a CORS proxy
       async function fetchTafData(icao) {
-        // Using standard string addition here to avoid quote formatting issues
         const tafElement = document.getElementById("taf-" + icao);
         if (!tafElement) return;
 
         try {
-          // Updated URL construction
-          const url =
+          // 1. Define the actual AviationWeather endpoint
+          const awcUrl =
             "https://aviationweather.gov/api/data/taf?ids=" +
             icao +
             "&format=raw";
-          const response = await fetch(url);
+
+          // 2. Wrap the URL in a public CORS proxy 
+          // encodeURIComponent ensures the ?ids=... formatting doesn't break the proxy request
+          const proxyUrl = 
+            "https://api.allorigins.win/raw?url=" + encodeURIComponent(awcUrl);
+
+          // Fetch using the proxy
+          const response = await fetch(proxyUrl);
 
           if (!response.ok) {
-            throw new Error("AWC API returned an error: " + response.status);
+            throw new Error("API returned an error: " + response.status);
           }
 
           const rawTafText = await response.text();
@@ -460,9 +466,10 @@
         } catch (error) {
           console.error("Error fetching TAF for " + icao + ":", error);
           tafElement.innerHTML =
-            "<span style='color: #d9534f;'>Failed to load TAF. Check internet connection.</span>";
+            "<span style='color: #d9534f;'>Failed to load TAF. Check internet connection or proxy status.</span>";
         }
       }
+
     </script>
   </body>
 </html>
