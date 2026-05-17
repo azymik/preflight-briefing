@@ -446,7 +446,7 @@
           // 2. Wrap the URL in a public CORS proxy 
           // encodeURIComponent ensures the ?ids=... formatting doesn't break the proxy request
           const proxyUrl = 
-            "https://api.allorigins.win/raw?url=" + encodeURIComponent(awcUrl);
+            "https://corsproxy.io/?" + encodeURIComponent(awcUrl);
 
           // Fetch using the proxy
           const response = await fetch(proxyUrl);
