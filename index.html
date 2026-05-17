@@ -249,7 +249,9 @@
       // Load data from info.json when the page loads
       window.onload = async () => {
         try {
-          const response = await fetch('info.json?t=' + new Date().getTime(), { cache: 'no-store' });
+          const response = await fetch("info.json?t=" + new Date().getTime(), {
+            cache: "no-store",
+          });
 
           if (!response.ok) {
             throw new Error(`HTTP error! status: ${response.status}`);
@@ -385,14 +387,9 @@
           html += `<div class="notams-container">`;
 
           if (item.NOTAMS && item.NOTAMS.length > 0) {
-            // Handle spelling variations in your JSON ("Relation", "Ralation", "relation")
             item.NOTAMS.forEach((notam) => {
-              const num = notam.Number || notam.number;
-              const rel =
-                notam.Relation ||
-                notam.relation ||
-                notam.Ralation ||
-                "No remarks";
+              const num = notam.Number;
+              const rel = notam.Relation;
               html += `
                         <div class="notam-item">
                             <span class="notam-number">${num}</span>
