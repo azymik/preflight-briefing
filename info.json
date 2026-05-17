@@ -31,22 +31,22 @@
         {
           "Number": "O9/26",
           "Relation": "",
-          "End": ""
+          "End": "31 DEC 2037 -23:59"
         },
         {
           "Number": "A1191/26",
           "Relation": "Near cargo apron that's on NE part of airport",
-          "End": ""
+          "End": "20 JUL 2026 - 10:00"
         },
         {
           "Number": "A1152/26",
           "Relation": "We are code letter E",
-          "End": ""
+          "End": "23 JUL 2026 - 0800"
         },
         {
           "Number": "A1031/26",
           "Relation": "Available for us, which is code letter E",
-          "End": ""
+          "End": "10 JUL 2026 - 08:00"
         },
         {
           "Number": "X7/26",
@@ -56,37 +56,42 @@
         {
           "Number": "U672/26",
           "Relation": "",
-          "End": ""
+          "End": "29 JUN 2026 - 22:00"
         },
         {
           "Number": "A818/26",
           "Relation": "",
-          "End": ""
+          "End": "30 MAY 2026 - 09:00"
         },
         {
           "Number": "A500/26",
           "Relation": "SW part of airport, still have TWY S for taxi to takeoff RWY 05R",
-          "End": ""
+          "End": "29 MAY 2026 - 08:00"
         },
         {
           "Number": "A445/26",
           "Relation": "Applicable to A380",
-          "End": ""
+          "End": "24 MAY 2026 - 08:00"
         },
         {
-          "Number": "A4705/25-A4706/25",
+          "Number": "A4706/25",
           "Relation": "",
-          "End": ""
+          "End": "31 DEC 2026 - 10:00"
+        },
+        {
+          "Number": "A4705/25",
+          "Relation": "",
+          "End": "31 JUL 2027 - 10:00"
         },
         {
           "Number": "X24/25",
           "Relation": "",
-          "End": ""
+          "End": "30 MAY 2026 - 09:00"
         },
         {
           "Number": "X1270/3",
           "Relation": "LT: 1130-1200 daily and 0100-0630 even days",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         }
       ]
     },
@@ -99,7 +104,7 @@
         {
           "Number": "F1397/26",
           "Relation": "No chart for this airport, All short RWYs (longest 08R-26L 1525 m)",
-          "End": ""
+          "End": "27 JUN 2026 - 18:00"
         }
       ]
     },
@@ -139,44 +144,39 @@
       ],
       "NOTAMS": [
         {
-          "Number": "C1698/26",
-          "Relation": "Time related, Still has 08L/26R (13/31 2225 m)",
-          "End": ""
-        },
-        {
-          "Number": "C1706/26",
-          "Relation": "Short RWY (2225m), Still has 08L/26R or 08R/26L (Time related)",
-          "End": ""
+          "Number": "C1710/26",
+          "Relation": "Short RWY (2225m), Still has 08L/26R or 08R/26L",
+          "End": "04 AUG 2026 - 06:15"
         },
         {
           "Number": "C1601/26",
           "Relation": "We are not authorized to do RNAV(RNP)",
-          "End": ""
+          "End": "20 JUL 2026 - 15:00"
         },
         {
           "Number": "F1401/26",
           "Relation": "",
-          "End": ""
+          "End": "26 JUN 2026 - 23:59"
         },
         {
           "Number": "C828/26",
           "Relation": "",
-          "End": ""
+          "End": "26 JUN 2026 - 23:59"
         },
         {
           "Number": "C829/26",
-          "Relation": "Short RWY (2225m), Still has RNAV approach, INST PROC NOT AUTH (A548/26-END 03 JUN 2026 - 14:00)",
-          "End": ""
+          "Relation": "Short RWY (2225m), Still has RNAV approach, RWY CLSD (C1710/26)",
+          "End": "26 JUN 2026 - 23:59"
         },
         {
           "Number": "C548/26",
-          "Relation": "Short RWY (2225m)",
-          "End": ""
+          "Relation": "Short RWY (2225m), RWY CLSD (C1710/26)",
+          "End": "03 JUN 2026 - 14:00"
         },
         {
           "Number": "C280/26",
           "Relation": "We are not authorized to do RNAV(RNP)",
-          "End": ""
+          "End": "01 JAN 2038 - 00:00"
         }
       ]
     },
@@ -189,7 +189,7 @@
         {
           "Number": "A2056/25",
           "Relation": "No chart for this airport, short RWY (16-34 2042 m)",
-          "End": ""
+          "End": "01 JAN 2038 - 00:00"
         }
       ]
     },
@@ -227,82 +227,82 @@
         {
           "Number": "A566/26",
           "Relation": "Still has RNAV approach",
-          "End": ""
+          "End": "20 MAY 2026 - 20:00"
         },
         {
           "Number": "A510/26",
           "Relation": "LOC approach, short RWY 1829 m",
-          "End": ""
+          "End": "20 MAY 2026 - 20:00"
         },
         {
           "Number": "A317/26",
           "Relation": "Changed of Missed App Proc",
-          "End": ""
+          "End": "10 OCT 2026 - 19:46"
         },
         {
           "Number": "A318/26",
           "Relation": "",
-          "End": ""
+          "End": "10 OCT 2026 - 19:46"
         },
         {
           "Number": "A197/26",
           "Relation": "Use RA",
-          "End": ""
+          "End": "31 JUL 2026 - 21:11"
         },
         {
           "Number": "A50/26",
           "Relation": "75 feet higher",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A51/26",
           "Relation": "Still can do standard CAT I",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A52/26",
           "Relation": "ILS U/S (A566/26-END 20 MAY 2026 - 20:00)",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A53/26",
           "Relation": "We are not authorized to do RNAV(RNP)",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A54/26",
           "Relation": "177 ft higher, ILS U/S (A566/26-END 20 MAY 2026 - 20:00)",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A55/26",
           "Relation": "81 ft higher",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A56/26",
           "Relation": "We are not authorized to do RNAV(RNP)",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A67/26",
           "Relation": "73 ft higher, or use ILS",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A68/26",
           "Relation": "Has LNAV/VNAV DA",
-          "End": ""
+          "End": "15 JUN 2026 - 19:43"
         },
         {
           "Number": "A9/26",
           "Relation": "Chart: No minimum climb gradient specified",
-          "End": ""
+          "End": "03 JAN 2028 - 10:36"
         },
         {
           "Number": "A1519/25",
           "Relation": "Has LNAV/VNAV DA",
-          "End": ""
+          "End": "23 DEC 2027 - 15:22"
         }
       ]
     },
@@ -338,6 +338,11 @@
       ],
       "NOTAMS": [
         {
+          "Number": "A1151/26-A1152/26",
+          "Relation": "Still has RNAV approach",
+          "End": "22 MAY 2026 - 23:59"
+        },
+        {
           "Number": "A1134/26",
           "Relation": "SID S bound",
           "End": ""
@@ -345,113 +350,112 @@
         {
           "Number": "A1125/26",
           "Relation": "last high speed exit TWY from 34L",
-          "End": ""
+          "End": "30 JUN 2026 - 13:00"
         },
         {
           "Number": "A1122/26",
-
           "Relation": "S of south satellite apron, our wingspan 212 ft 5 in",
-          "End": ""
+          "End": "22 MAY 2026 - 15:00"
         },
         {
           "Number": "A1120/26",
           "Relation": "S of south satellite apron",
-          "End": ""
+          "End": "22 MAY 2026 - 15:00"
         },
         {
           "Number": "A1098/26",
           "Relation": "",
-          "End": ""
+          "End": "19 MAY 2026 - 04:00"
         },
         {
           "Number": "A1086/26",
           "Relation": "first high speed exit TWY from 16C",
-          "End": ""
+          "End": "23 MAY 2026 - 23:59"
         },
         {
           "Number": "A985/26-A990/26",
           "Relation": "Time related",
-          "End": ""
+          "End": "31 JUL 2026 - 23:00"
         },
         {
           "Number": "A972/26",
           "Relation": "SID NW bound",
-          "End": ""
+          "End": "15 JUL 2026 - 13:47"
         },
         {
           "Number": "A975/26",
           "Relation": "SID SW bound",
-          "End": ""
+          "End": "15 JUL 2026 - 13:47"
         },
         {
           "Number": "A912/26",
           "Relation": "We are not authorized to do SLS approach",
-          "End": ""
+          "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A913/26",
           "Relation": "Not affected on LNAV/VNAV DA",
-          "End": ""
+          "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A909/26",
           "Relation": "34 ft higher",
-          "End": ""
+          "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A908/26",
           "Relation": "Still can do standard CAT I",
-          "End": ""
+          "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A905/26",
           "Relation": "Still can do standard CAT I",
-          "End": ""
+          "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A268/26-A284/26",
           "Relation": "",
-          "End": ""
+          "End": "31 JUL 2026 - 03:00"
         },
         {
           "Number": "A151/26",
           "Relation": "SID W bound",
-          "End": ""
+          "End": "03 SEP 2026 - 09:01"
         },
         {
           "Number": "A2575/25",
           "Relation": "We are not authorized to do RNAV(RNP)",
-          "End": ""
+          "End": "08 OCT 2027 - 14:07"
         },
         {
           "Number": "A802/25",
           "Relation": "We are not authorized to do RNAV(RNP)",
-          "End": ""
+          "End": "17 MAR 2027 - 12:49"
         },
         {
           "Number": "A624/25",
           "Relation": "We are not authorized to do RNAV(RNP)",
-          "End": ""
+          "End": "25 FEB 2027 - 20:29"
         },
         {
           "Number": "A585/25",
           "Relation": "For INOP ALS, CAT C/D VIS 1 3/8 SM (Chart: 1 3/4), possibility is lower from VDP",
-          "End": ""
+          "End": "20 FEB 2027 - 14:59"
         },
         {
           "Number": "A584/25",
           "Relation": "We are not authorized to do RNAV(RNP)",
-          "End": ""
+          "End": "20 FEB 2027 - 14:58"
         },
         {
           "Number": "O46/24",
           "Relation": "",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         },
         {
           "Number": "A2033/24",
           "Relation": "Chart: DME or RADAR required",
-          "End": ""
+          "End": "31 JUL 2026 - 14:36"
         }
       ]
     },
@@ -503,6 +507,70 @@
       ]
     },
     {
+      "ICAO": "PANC",
+      "Name": "Ted Stevens Anchorage INTL",
+      "Runways": ["07L-25R 3231x46", "07R-25L 3780x61", "15-33 3312x61"],
+      "Available_Approaches": [
+        {
+          "RWY": "07L",
+          "APPs": ["ILS", "RNAV"]
+        },
+        {
+          "RWY": "07R",
+          "APPs": ["ILS", "RNAV"]
+        },
+        {
+          "RWY": "15",
+          "APPs": ["ILS", "RNAV"]
+        },
+        {
+          "RWY": "25L",
+          "APPs": ["VIS"]
+        },
+        {
+          "RWY": "25R",
+          "APPs": ["VIS"]
+        }
+      ],
+      "NOTAMS": [
+        {
+          "Number": "A916/26",
+          "Relation": "Same RVR/VIS requirements, EXC LNAV MDA",
+          "End": "15 JUN 2026 - 15:00"
+        },
+        {
+          "Number": "A4189/25",
+          "Relation": "LNAV/VNAV DA no change",
+          "End": "28 OCT 2027 - 23:59"
+        },
+        {
+          "Number": "A4133/25",
+          "Relation": "We are not authorized to do SLS approach",
+          "End": "22 OCT 2027 - 14:54"
+        },
+        {
+          "Number": "A4115/25",
+          "Relation": "2 feet higher",
+          "End": "20 OCT 2027 - 23:59"
+        },
+        {
+          "Number": "A4082/25",
+          "Relation": "We are not authorized to do RNAV(RNP)",
+          "End": "15 OCT 2027 - 13:04"
+        },
+        {
+          "Number": "A3981/25",
+          "Relation": "STAR NW",
+          "End": "02 OCT 2026 - 09:01"
+        },
+        {
+          "Number": "A3975/25",
+          "Relation": "500 feet more",
+          "End": "30 SEP 2027 - 16:22"
+        }
+      ]
+    },
+    {
       "ICAO": "PMDY",
       "Name": "Henderson (Midway Atoll)",
       "Runways": ["06-24 2377x46"],
@@ -536,7 +604,7 @@
         {
           "Number": "A4786/25",
           "Relation": "1601-2230 UTC (0001-0630 Local)",
-          "End": ""
+          "End": "31 DEC 2026 - 22:30"
         }
       ]
     },
@@ -571,27 +639,27 @@
         {
           "Number": "C1357/26",
           "Relation": "Normally use ILS 19L, Still has RNAV approach",
-          "End": ""
+          "End": "19 MAY 2026 - 09:00"
         },
         {
           "Number": "C1293/26-C1294/26",
           "Relation": "",
-          "End": ""
+          "End": "31 JUL 2026 - 22:00"
         },
         {
           "Number": "X33/26",
           "Relation": "Use TEMP Charts",
-          "End": ""
+          "End": "10 JUN 2026 - 23:59"
         },
         {
           "Number": "O91/22",
           "Relation": "Minimum refuel quantity in Japan",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         },
         {
           "Number": "O81/22",
-          "Relation": "Take note",
-          "End": ""
+          "Relation": "",
+          "End": "31 DEC 2037 - 23:59"
         }
       ]
     },
@@ -767,19 +835,29 @@
       ],
       "NOTAMS": [
         {
-          "Number": "H1583/26",
-          "Relation": "Time related, Still has 18R/23L",
-          "End": ""
+          "Number": "H1526/26",
+          "Relation": "RWY CLRD (H1584/26)",
+          "End": "31 MAY 2026 - 21:00"
+        },
+        {
+          "Number": "H1527/26",
+          "Relation": "RWY CLRD (H1584/26)",
+          "End": "31 MAY 2026 - 21:00"
+        },
+        {
+          "Number": "H1584/26",
+          "Relation": "Time related, Still has 18L/36R",
+          "End": "31 MAY 2026 - 21:30"
         },
         {
           "Number": "O90/22",
           "Relation": "Minimum refuel quantity in Japan",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         },
         {
           "Number": "O80/22",
           "Relation": "",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         }
       ]
     }
@@ -802,12 +880,12 @@
         {
           "Number": "A600/26",
           "Relation": "See X6/26 (next) for detailed",
-          "End": ""
+          "End": "31 MAR 2027 - 23:59"
         },
         {
           "Number": "X6/26",
           "Relation": "CTOT for WPT or airspace constraint is -5/+5 min. Notify at least 15 min before COBT if realize COBT can not be met",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         }
       ]
     },
@@ -823,17 +901,17 @@
         {
           "Number": "A476/26",
           "Relation": "Deep in center of USA, on Southern part",
-          "End": ""
+          "End": "25 MAY 2026 - 23:59"
         },
         {
           "Number": "A467/26",
           "Relation": "Time related, in Oceanic W of USA, upto FL230",
-          "End": ""
+          "End": "02 JUN 2026 - 07:00"
         },
         {
           "Number": "A46/22",
           "Relation": "Transponder requirements",
-          "End": ""
+          "End": "01 JAN 2038 - 00:00"
         }
       ]
     },
@@ -842,9 +920,19 @@
       "Name": "Seattle Lower",
       "NOTAMS": [
         {
+          "Number": "A9999/26",
+          "Relation": "ADS-R, TIS-B, FIS-B may not be available",
+          "End": "01 JAN 2038 - 00:00"
+        },
+        {
           "Number": "A2167/26",
           "Relation": "Time related, 13 nm W of KPDX",
-          "End": ""
+          "End": "17 MAY 2026 - 23:59"
+        },
+        {
+          "Number": "A2418/26",
+          "Relation": "Western Washington and Northwestern Oregon",
+          "End": "25 MAY 2026 - 16:00"
         },
         {
           "Number": "A2362/26 A2391/26",
@@ -857,24 +945,14 @@
           "End": ""
         },
         {
-          "Number": "A2377/26 A1786/26 A1784/26 A1780/26 A1691/26",
-          "Relation": "ADS-R, TIS-B, FIS-B may not be available",
-          "End": ""
-        },
-        {
           "Number": "A476/26",
           "Relation": "Deep in center of USA, on Southern part",
-          "End": ""
-        },
-        {
-          "Number": "A15/26 A4146/25",
-          "Relation": "ADS-R, TIS-B, FIS-B may not be available",
-          "End": ""
+          "End": "25 MAY 2026 - 23:59"
         },
         {
           "Number": "A46/22",
           "Relation": "Transponder requirements",
-          "End": ""
+          "End": "01 JAN 2038 - 00:00"
         }
       ]
     },
@@ -915,27 +993,27 @@
         {
           "Number": "P806/26",
           "Relation": "Near ROAH, ROMY, ROIG, ROYN",
-          "End": ""
+          "End": "18 MAY 2026 - 15:00"
         },
         {
           "Number": "X111/25",
           "Relation": "",
-          "End": ""
+          "End": "13 JUL 2026 - 12:00"
         },
         {
           "Number": "X75/24",
           "Relation": "trial of 12 nm lateral separation for climb/descend thru aircraft at level flight",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         },
         {
           "Number": "X76/24",
           "Relation": "",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         },
         {
           "Number": "X90/23",
           "Relation": "trial of 23 nm lateral separation",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         }
       ]
     },
@@ -946,7 +1024,7 @@
         {
           "Number": "A815/26",
           "Relation": "",
-          "End": ""
+          "End": "30 JUN 2026 - 15:59"
         }
       ]
     }
