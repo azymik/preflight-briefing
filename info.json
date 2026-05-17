@@ -691,22 +691,22 @@
         {
           "Number": "F461/26",
           "Relation": "Time related",
-          "End": ""
+          "End": "31 MAY 2026 - 21:30"
         },
         {
           "Number": "F463/26",
           "Relation": "Time related, Still has 16L/34R",
-          "End": ""
+          "End": "31 MAY 2026 - 21:30"
         },
         {
           "Number": "O89/22",
           "Relation": "Minimum refuel quantity in Japan",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         },
         {
           "Number": "O17/22",
           "Relation": "",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         }
       ]
     },
@@ -749,12 +749,12 @@
         {
           "Number": "J1016/26-J1017/26",
           "Relation": "Detail in Jepp",
-          "End": ""
+          "End": "10 JUN 2026 - 15:00"
         },
         {
           "Number": "J1022/26",
           "Relation": "Detail in Jepp",
-          "End": ""
+          "End": "10 JUN 2026 - 15:00"
         },
         {
           "Number": "J959/26",
@@ -764,12 +764,12 @@
         {
           "Number": "J905/26",
           "Relation": "Time related (2330-0600 Local), RWY CLSD (J958/26-END 31 MAY 2026 - 21:00)",
-          "End": ""
+          "End": "31 MAY 2026 - 21:00"
         },
         {
           "Number": "J958/26",
           "Relation": "Time related (2330-0600 Local)",
-          "End": ""
+          "End": "31 MAY 2026 - 21:00"
         },
         {
           "Number": "J912/26",
@@ -784,22 +784,22 @@
         {
           "Number": "J922/26",
           "Relation": "",
-          "End": ""
+          "End": "10 JUN 2026 - 15:00"
         },
         {
           "Number": "X21/26",
           "Relation": "LDA LOC/DME 22 U/S but have TEMPO ALTN LOC/DME",
-          "End": ""
+          "End": "28 OCT 2026 - 15:00"
         },
         {
           "Number": "X2/23",
           "Relation": "",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         },
         {
           "Number": "X38/21",
           "Relation": "We are not authorized to do GLS",
-          "End": ""
+          "End": "31 DEC 2037 - 23:59"
         }
       ]
     },
@@ -828,12 +828,12 @@
       "NOTAMS": [
         {
           "Number": "H1526/26",
-          "Relation": "RWY CLRD (H1584/26)",
+          "Relation": "RWY CLSD (H1584/26)",
           "End": "31 MAY 2026 - 21:00"
         },
         {
           "Number": "H1527/26",
-          "Relation": "RWY CLRD (H1584/26)",
+          "Relation": "RWY CLSD (H1584/26)",
           "End": "31 MAY 2026 - 21:00"
         },
         {
@@ -862,7 +862,7 @@
         {
           "Number": "A1295/26",
           "Relation": "Time related, in sea directly E of Taiwan island",
-          "End": ""
+          "End": "03 JUN 2026 - 01:20"
         },
         {
           "Number": "A1013/26",
