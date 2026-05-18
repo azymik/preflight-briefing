@@ -723,6 +723,42 @@
       ]
     },
     {
+      "ICAO": "RJSS",
+      "Name": "Sendai",
+      "Runways": ["09-27 3000x45", "12-30 1200x45"],
+      "Available_Approaches": [
+        {
+          "RWY": "09",
+          "APPs": ["RNP"]
+        },
+        {
+          "RWY": "27",
+          "APPs": ["ILS I", "VOR"]
+        },
+        {
+          "RWY": "30",
+          "APPs": ["VOR"]
+        }
+      ],
+      "NOTAMS": [
+        {
+          "Number": "O4/26",
+          "Relation": "",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "O38/23",
+          "Relation": "CLSD DLY 1300-2230, NO ATC",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "O11/23",
+          "Relation": "Minimum refuel quantity in Japan",
+          "End": "31 DEC 2037 - 23:59"
+        }
+      ]
+    },
+    {
       "ICAO": "RJTT",
       "Name": "Tokyo (Haneda) INTL",
       "Runways": [
@@ -760,7 +796,7 @@
       "NOTAMS": [
         {
           "Number": "J1016/26-J1017/26",
-          "Relation": "Detail in Jepp",
+          "Relation": "Many Lighting Systems U/S, Detail in Jepp",
           "End": "10 JUN 2026 - 15:00"
         },
         {
@@ -769,29 +805,29 @@
           "End": "10 JUN 2026 - 15:00"
         },
         {
-          "Number": "J959/26",
-          "Relation": "Time related (0030-0630 Local)",
-          "End": ""
+          "Number": "J903/26",
+          "Relation": "ILS 16R U/S, time related",
+          "End": "31 MAY 2026 - 21:00"
+        },
+        {
+          "Number": "J904/26",
+          "Relation": "ILS 34L U/S, time related",
+          "End": "31 MAY 2026 - 21:00"
+        },
+        {
+          "Number": "J957/26",
+          "Relation": "RWY 16R/34L CLSD, time related",
+          "End": "31 MAY 2026 - 21:00"
         },
         {
           "Number": "J905/26",
-          "Relation": "Time related (2330-0600 Local), RWY CLSD (J958/26-END 31 MAY 2026 - 21:00)",
+          "Relation": "ILS 22 U/S, time related",
           "End": "31 MAY 2026 - 21:00"
         },
         {
           "Number": "J958/26",
-          "Relation": "Time related (2330-0600 Local)",
+          "Relation": "RWY 04/22 CLSD, time related",
           "End": "31 MAY 2026 - 21:00"
-        },
-        {
-          "Number": "J912/26",
-          "Relation": "Time related (0030-0630 Local), still have RNP approach",
-          "End": ""
-        },
-        {
-          "Number": "J913/26",
-          "Relation": "Time related (0030-0630 Local)",
-          "End": ""
         },
         {
           "Number": "J922/26",
@@ -810,7 +846,7 @@
         },
         {
           "Number": "X38/21",
-          "Relation": "We are not authorized to do GLS",
+          "Relation": "",
           "End": "31 DEC 2037 - 23:59"
         }
       ]
