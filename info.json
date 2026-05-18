@@ -553,6 +553,28 @@
       ]
     },
     {
+      "ICAO": "PASY",
+      "Name": "Eareckson AS (Shemya)",
+      "Runways": ["10-28 3049x46"],
+      "Available_Approaches": [
+        {
+          "RWY": "10",
+          "APPs": ["RNAV", "VOR"]
+        },
+        {
+          "RWY": "28",
+          "APPs": ["ILS I", "RNAV", "VOR"]
+        }
+      ],
+      "NOTAMS": [
+        {
+          "Number": "M292/26 M294/26",
+          "Relation": "Required VIS/RVR affected EXC ILS 28",
+          "End": "20 JUL 2026 - 23:00"
+        }
+      ]
+    },
+    {
       "ICAO": "PMDY",
       "Name": "Henderson (Midway Atoll)",
       "Runways": ["06-24 2377x46"],
