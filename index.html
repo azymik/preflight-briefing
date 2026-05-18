@@ -190,6 +190,70 @@
         left: 1rem;
         top: 1rem;
       }
+
+      /* Tag Color States */
+      .tag {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        margin: 0.2rem;
+        /* Add smooth transition and prevent text selection when clicking quickly */
+        transition:
+          background-color 0.2s,
+          color 0.2s;
+        user-select: none;
+      }
+
+      .tag-clickable {
+        cursor: pointer;
+      }
+
+      .tag-green {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+      .tag-yellow {
+        background: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeeba;
+      }
+      .tag-red {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      /* Header Actions */
+      .airport-actions {
+        display: flex;
+        gap: 0.5rem;
+        align-items: center;
+      }
+
+      .btn-action {
+        padding: 0.25rem 0.5rem;
+        border: none;
+        border-radius: 4px;
+        font-size: 0.85rem;
+        cursor: pointer;
+      }
+
+      .btn-save {
+        background: #28a745;
+        color: white;
+      }
+      .btn-save:active {
+        background: #218838;
+      }
+      .btn-reset {
+        background: #6c757d;
+        color: white;
+      }
+      .btn-reset:active {
+        background: #5a6268;
+      }
     </style>
   </head>
   <body>
@@ -354,26 +418,41 @@
           card.className = "card";
 
           // Build Base HTML
-          let html = `
-                <div class="card-header">
-                    <h3>${item.ICAO} - ${item.Name}</h3>
-                </div>
-                <div class="info-grid">
-            `;
+          let html = `<div class="card-header">
+              <h3>${item.ICAO} - ${item.Name}</h3>`;
+
+          // Add Save and Reset buttons only for airports
+          if (type === "airports") {
+            html += `
+        <div class="airport-actions">
+            <button class="btn-action btn-save" onclick="saveColors('${item.ICAO}', this)">Save</button>
+            <button class="btn-action btn-reset" onclick="resetColors('${item.ICAO}')">Reset</button>
+        </div>
+    `;
+          }
+
+          html += `</div>
+         <div class="info-grid" id="grid-${item.ICAO}">`; // Added ID for targeting
 
           // If it's an airport, add runways and approaches
           if (type === "airports") {
+            // Load saved color states if they exist, otherwise default to empty objects
+            let savedState = item.colorState || { runways: {}, approaches: {} };
+
             html += `<div><strong>Runways:</strong><br>`;
-            item.Runways.forEach(
-              (r) => (html += `<span class="tag">${r}</span>`),
-            );
+            item.Runways.forEach((r, idx) => {
+              let colorClass = savedState.runways[idx] || "tag-green"; // Default green
+              html += `<span class="tag tag-clickable ${colorClass}" data-type="runway" data-idx="${idx}" onclick="cycleColor(this)">${r}</span>`;
+            });
             html += `</div><div><strong>Approaches:</strong><br>`;
+
             if (
               item.Available_Approaches &&
               item.Available_Approaches.length > 0
             ) {
-              item.Available_Approaches.forEach((app) => {
-                html += `<span class="tag"><b>${app.RWY}:</b> ${app.APPs.join(", ")}</span>`;
+              item.Available_Approaches.forEach((app, idx) => {
+                let colorClass = savedState.approaches[idx] || "tag-green"; // Default green
+                html += `<span class="tag tag-clickable ${colorClass}" data-type="approach" data-idx="${idx}" onclick="cycleColor(this)"><b>${app.RWY}:</b> ${app.APPs.join(", ")}</span>`;
               });
             } else {
               html += `<span class="tag" style="background:#ffdada">No Data/Charts</span>`;
@@ -443,9 +522,9 @@
             icao +
             "&format=raw";
 
-          // 2. Wrap the URL in a public CORS proxy 
+          // 2. Wrap the URL in a public CORS proxy
           // encodeURIComponent ensures the ?ids=... formatting doesn't break the proxy request
-          const proxyUrl = 
+          const proxyUrl =
             "https://corsproxy.io/?" + encodeURIComponent(awcUrl);
 
           // Fetch using the proxy
@@ -469,7 +548,77 @@
             "<span style='color: #d9534f;'>Failed to load TAF. Check internet connection or proxy status.</span>";
         }
       }
+      // --- NEW COLOR CYCLING AND STATE MANAGEMENT FUNCTIONS ---
 
+      function cycleColor(element) {
+        if (element.classList.contains("tag-green")) {
+          element.classList.remove("tag-green");
+          element.classList.add("tag-yellow");
+        } else if (element.classList.contains("tag-yellow")) {
+          element.classList.remove("tag-yellow");
+          element.classList.add("tag-red");
+        } else if (element.classList.contains("tag-red")) {
+          element.classList.remove("tag-red");
+          element.classList.add("tag-green");
+        } else {
+          // Failsafe default
+          element.classList.add("tag-green");
+        }
+      }
+
+      function saveColors(icao, btnElement) {
+        // Find the specific airport in our appState
+        const airport = appState.airports.find((a) => a.ICAO === icao);
+        if (!airport) return;
+
+        // Initialize the color state object for this airport
+        airport.colorState = { runways: {}, approaches: {} };
+
+        // Scrape the DOM for the current color states of this specific airport's grid
+        const grid = document.getElementById(`grid-${icao}`);
+        const tags = grid.querySelectorAll(".tag[data-type]");
+
+        tags.forEach((tag) => {
+          const type = tag.getAttribute("data-type");
+          const idx = tag.getAttribute("data-idx");
+
+          let colorClass = "tag-green";
+          if (tag.classList.contains("tag-yellow")) colorClass = "tag-yellow";
+          if (tag.classList.contains("tag-red")) colorClass = "tag-red";
+
+          // Save the class to the corresponding array
+          if (type === "runway") airport.colorState.runways[idx] = colorClass;
+          if (type === "approach")
+            airport.colorState.approaches[idx] = colorClass;
+        });
+
+        // Brief visual feedback on the save button
+        const originalText = btnElement.innerText;
+        btnElement.innerText = "Saved!";
+        btnElement.style.background = "#1e7e34"; // Darker green
+        setTimeout(() => {
+          btnElement.innerText = originalText;
+          btnElement.style.background = ""; // Revert to default class color
+        }, 1000);
+      }
+
+      function resetColors(icao) {
+        const grid = document.getElementById(`grid-${icao}`);
+        if (!grid) return;
+
+        // Find all interactive tags and force them back to green
+        const tags = grid.querySelectorAll(".tag[data-type]");
+        tags.forEach((tag) => {
+          tag.classList.remove("tag-yellow", "tag-red");
+          tag.classList.add("tag-green");
+        });
+
+        // Clear the saved state in appState so redrawing the UI doesn't bring old colors back
+        const airport = appState.airports.find((a) => a.ICAO === icao);
+        if (airport) {
+          airport.colorState = { runways: {}, approaches: {} };
+        }
+      }
     </script>
   </body>
 </html>
