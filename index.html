@@ -323,11 +323,28 @@
 
           const briefingData = await response.json();
 
-          // Initialize state with selected: true
+          // --- NEW: Retrieve saved color states from local storage ---
+          let savedColorStates = {};
+          const storageData = localStorage.getItem("pilotBriefingColorStates");
+          if (storageData) {
+            try {
+              savedColorStates = JSON.parse(storageData);
+            } catch (e) {
+              console.error("Failed to parse saved color states", e);
+            }
+          }
+
+          // Initialize state with selected: true AND the saved color states
           appState.airports = briefingData.airports.map((a) => ({
             ...a,
             selected: true,
+            // Inject saved state if it exists for this ICAO, otherwise use default empty structure
+            colorState: savedColorStates[a.ICAO] || {
+              runways: {},
+              approaches: {},
+            },
           }));
+
           appState.firs = briefingData.firs.map((f) => ({
             ...f,
             selected: true,
@@ -339,12 +356,11 @@
         } catch (error) {
           console.error("Failed to load info.json:", error);
           document.getElementById("setup-view").innerHTML = `
-                <div style="background: #fee; padding: 1rem; border: 1px solid #f99; border-radius: 8px;">
-                    <h3 style="color: #c00; margin-top:0;">Error loading data</h3>
-                    <p>Could not load <strong>info.json</strong>. Ensure the file is in the same folder as index.html.</p>
-                    <p><small>Note: Browsers block local file fetching for security. This will work perfectly on GitHub Pages, but if testing locally on your computer, you need to use a local web server (like VS Code Live Server).</small></p>
-                </div>
-            `;
+      <div style="background: #fee; padding: 1rem; border: 1px solid #f99; border-radius: 8px;">
+        <h3 style="color: #c00; margin-top:0;">Error loading data</h3>
+        <p>Could not load <strong>info.json</strong>. Ensure the file is in the same folder as index.html.</p>
+      </div>
+    `;
         }
       };
 
@@ -567,14 +583,11 @@
       }
 
       function saveColors(icao, btnElement) {
-        // Find the specific airport in our appState
         const airport = appState.airports.find((a) => a.ICAO === icao);
         if (!airport) return;
 
-        // Initialize the color state object for this airport
         airport.colorState = { runways: {}, approaches: {} };
 
-        // Scrape the DOM for the current color states of this specific airport's grid
         const grid = document.getElementById(`grid-${icao}`);
         const tags = grid.querySelectorAll(".tag[data-type]");
 
@@ -586,19 +599,20 @@
           if (tag.classList.contains("tag-yellow")) colorClass = "tag-yellow";
           if (tag.classList.contains("tag-red")) colorClass = "tag-red";
 
-          // Save the class to the corresponding array
           if (type === "runway") airport.colorState.runways[idx] = colorClass;
           if (type === "approach")
             airport.colorState.approaches[idx] = colorClass;
         });
 
-        // Brief visual feedback on the save button
+        // --- NEW: Save to local storage ---
+        persistStateToStorage();
+
         const originalText = btnElement.innerText;
         btnElement.innerText = "Saved!";
-        btnElement.style.background = "#1e7e34"; // Darker green
+        btnElement.style.background = "#1e7e34";
         setTimeout(() => {
           btnElement.innerText = originalText;
-          btnElement.style.background = ""; // Revert to default class color
+          btnElement.style.background = "";
         }, 1000);
       }
 
@@ -606,18 +620,34 @@
         const grid = document.getElementById(`grid-${icao}`);
         if (!grid) return;
 
-        // Find all interactive tags and force them back to green
         const tags = grid.querySelectorAll(".tag[data-type]");
         tags.forEach((tag) => {
           tag.classList.remove("tag-yellow", "tag-red");
           tag.classList.add("tag-green");
         });
 
-        // Clear the saved state in appState so redrawing the UI doesn't bring old colors back
         const airport = appState.airports.find((a) => a.ICAO === icao);
         if (airport) {
           airport.colorState = { runways: {}, approaches: {} };
+          // --- NEW: Update local storage to reflect the reset ---
+          persistStateToStorage();
         }
+      }
+
+      function persistStateToStorage() {
+        // We only want to save the color states, not the entire info.json dataset
+        const stateToSave = {};
+        appState.airports.forEach((airport) => {
+          // Only save if there's actually a colorState defined
+          if (airport.colorState) {
+            stateToSave[airport.ICAO] = airport.colorState;
+          }
+        });
+
+        localStorage.setItem(
+          "pilotBriefingColorStates",
+          JSON.stringify(stateToSave),
+        );
       }
     </script>
   </body>
