@@ -466,9 +466,26 @@
               item.Available_Approaches &&
               item.Available_Approaches.length > 0
             ) {
-              item.Available_Approaches.forEach((app, idx) => {
-                let colorClass = savedState.approaches[idx] || "tag-green"; // Default green
-                html += `<span class="tag tag-clickable ${colorClass}" data-type="approach" data-idx="${idx}" onclick="cycleColor(this)"><b>${app.RWY}:</b> ${app.APPs.join(", ")}</span>`;
+              // Loop through each runway
+              item.Available_Approaches.forEach((app, rwyIdx) => {
+                // Create a wrapper for the runway label
+                html += `<div style="margin-bottom: 0.3rem; display: flex; align-items: center; flex-wrap: wrap;">`;
+                html += `<span style="font-size: 0.9em; font-weight: bold; color: #555; margin-right: 0.5rem; width: 35px;">${app.RWY}:</span>`;
+
+                // Loop through each individual approach for this runway
+                app.APPs.forEach((approachName, appIdx) => {
+                  // Create a unique ID for this specific button (e.g., "0-1", "2-0")
+                  let uniqueIdx = `${rwyIdx}-${appIdx}`;
+
+                  // Load saved state using the unique index
+                  let colorClass =
+                    savedState.approaches[uniqueIdx] || "tag-green";
+
+                  // Create the individual clickable tag
+                  html += `<span class="tag tag-clickable ${colorClass}" data-type="approach" data-idx="${uniqueIdx}" onclick="cycleColor(this)">${approachName}</span>`;
+                });
+
+                html += `</div>`; // Close the runway wrapper
               });
             } else {
               html += `<span class="tag" style="background:#ffdada">No Data/Charts</span>`;
