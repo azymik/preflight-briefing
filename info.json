@@ -49,11 +49,6 @@
           "End": "10 JUL 2026 - 08:00"
         },
         {
-          "Number": "X7/26",
-          "Relation": "Time related (0920-1100 Local)",
-          "End": ""
-        },
-        {
           "Number": "U672/26",
           "Relation": "",
           "End": "29 JUN 2026 - 22:00"
@@ -331,13 +326,8 @@
       "NOTAMS": [
         {
           "Number": "A1151/26-A1152/26",
-          "Relation": "Still has RNAV approach",
+          "Relation": "ILS 16C & 34C U/S",
           "End": "22 MAY 2026 - 23:59"
-        },
-        {
-          "Number": "A1134/26",
-          "Relation": "SID S bound",
-          "End": ""
         },
         {
           "Number": "A1125/26",
@@ -366,7 +356,7 @@
         },
         {
           "Number": "A985/26-A990/26",
-          "Relation": "Time related",
+          "Relation": "",
           "End": "31 JUL 2026 - 23:00"
         },
         {
@@ -381,27 +371,27 @@
         },
         {
           "Number": "A912/26",
-          "Relation": "We are not authorized to do SLS approach",
+          "Relation": "",
           "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A913/26",
-          "Relation": "Not affected on LNAV/VNAV DA",
+          "Relation": "",
           "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A909/26",
-          "Relation": "34 ft higher",
+          "Relation": "ILS 34C DA 638 ft, 34 ft higher",
           "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A908/26",
-          "Relation": "Still can do standard CAT I",
+          "Relation": "ILS 34R SA I & SA II PROC NA",
           "End": "05 SEP 2026 - 17:50"
         },
         {
           "Number": "A905/26",
-          "Relation": "Still can do standard CAT I",
+          "Relation": "ILS 16L SA I, CAT II & III PROC NA",
           "End": "05 SEP 2026 - 17:50"
         },
         {
@@ -416,27 +406,27 @@
         },
         {
           "Number": "A2575/25",
-          "Relation": "We are not authorized to do RNAV(RNP)",
+          "Relation": "",
           "End": "08 OCT 2027 - 14:07"
         },
         {
           "Number": "A802/25",
-          "Relation": "We are not authorized to do RNAV(RNP)",
+          "Relation": "",
           "End": "17 MAR 2027 - 12:49"
         },
         {
           "Number": "A624/25",
-          "Relation": "We are not authorized to do RNAV(RNP)",
+          "Relation": "",
           "End": "25 FEB 2027 - 20:29"
         },
         {
           "Number": "A585/25",
-          "Relation": "For INOP ALS, CAT C/D VIS 1 3/8 SM (Chart: 1 3/4), possibility is lower from VDP",
+          "Relation": "",
           "End": "20 FEB 2027 - 14:59"
         },
         {
           "Number": "A584/25",
-          "Relation": "We are not authorized to do RNAV(RNP)",
+          "Relation": "",
           "End": "20 FEB 2027 - 14:58"
         },
         {
@@ -446,7 +436,7 @@
         },
         {
           "Number": "A2033/24",
-          "Relation": "Chart: DME or RADAR required",
+          "Relation": "ILS 34C DME required (Chart: DME or RADAR required)",
           "End": "31 JUL 2026 - 14:36"
         }
       ]
@@ -828,17 +818,17 @@
       "NOTAMS": [
         {
           "Number": "H1526/26",
-          "Relation": "RWY CLSD (H1584/26)",
+          "Relation": "ILS 18R U/S, time related",
           "End": "31 MAY 2026 - 21:00"
         },
         {
           "Number": "H1527/26",
-          "Relation": "RWY CLSD (H1584/26)",
+          "Relation": "ILS 36L U/S, time related",
           "End": "31 MAY 2026 - 21:00"
         },
         {
           "Number": "H1584/26",
-          "Relation": "Time related, Still has 18L/36R",
+          "Relation": "RWY 18R/36L CLSD, time related",
           "End": "31 MAY 2026 - 21:30"
         },
         {
@@ -851,6 +841,94 @@
           "Relation": "",
           "End": "31 DEC 2037 - 23:59"
         }
+      ]
+    },
+    {
+      "ICAO": "VHHH",
+      "Name": "Hong Kong INTL",
+      "Runways": ["07L-25R 3800x60", "07C-25C 4225x60", "07R-25L 3800x60"],
+      "Available_Approaches": [
+        {
+          "RWY": "07C",
+          "APPs": ["ILS II", "RNP"]
+        },
+        {
+          "RWY": "07L",
+          "APPs": ["ILS 3", "RNP"]
+        },
+        {
+          "RWY": "07R",
+          "APPs": ["ILS II"]
+        },
+        {
+          "RWY": "25C",
+          "APPs": ["ILS 3", "RNP"]
+        },
+        {
+          "RWY": "25L",
+          "APPs": ["ILS II"]
+        },
+        {
+          "RWY": "25R",
+          "APPs": ["ILS I", "RNP"]
+        },
+      ],
+      "NOTAMS": [
+        {
+          "Number": "A988/26",
+          "Relation": "ILS 07R NA, time related",
+          "End": "19 MAY 2026 - 23:59"
+        },
+        {
+          "Number": "A987",
+          "Relation": "ILS 25L NA, time related",
+          "End": "19 MAY 2026 - 23:59"
+        },
+        {
+          "Number": "A660/26",
+          "Relation": "",
+          "End": "10 JUN 2026 - 23:59"
+        },
+        {
+          "Number": "X27/25",
+          "Relation": "",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "X3644/24",
+          "Relation": "",
+          "End": "01 JAN 2038 - 00:00"
+        },
+        {
+          "Number": "X12/24",
+          "Relation": "",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "X30/24",
+          "Relation": "ILS 25R caution",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "X31/24",
+          "Relation": "ILS 25R caution",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "X32/24",
+          "Relation": "ILS 07 caution",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "O44/24",
+          "Relation": "",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "X20/20",
+          "Relation": "",
+          "End": "31 DEC 2037 - 23:59"
+        },
       ]
     }
   ],
