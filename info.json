@@ -458,34 +458,9 @@
       ],
       "NOTAMS": [
         {
-          "Number": "A1151/26-A1152/26",
-          "Relation": "ILS 16C & 34C U/S",
-          "End": "22 MAY 2026 - 23:59"
-        },
-        {
           "Number": "A1125/26",
           "Relation": "last high speed exit TWY from 34L",
           "End": "30 JUN 2026 - 13:00"
-        },
-        {
-          "Number": "A1122/26",
-          "Relation": "S of south satellite apron, our wingspan 212 ft 5 in",
-          "End": "22 MAY 2026 - 15:00"
-        },
-        {
-          "Number": "A1120/26",
-          "Relation": "S of south satellite apron",
-          "End": "22 MAY 2026 - 15:00"
-        },
-        {
-          "Number": "A1098/26",
-          "Relation": "",
-          "End": "19 MAY 2026 - 04:00"
-        },
-        {
-          "Number": "A1086/26",
-          "Relation": "first high speed exit TWY from 16C",
-          "End": "23 MAY 2026 - 23:59"
         },
         {
           "Number": "A985/26-A990/26",
@@ -896,9 +871,59 @@
       ],
       "NOTAMS": [
         {
-          "Number": "A566/26",
-          "Relation": "Still has RNAV approach",
-          "End": "20 MAY 2026 - 20:00"
+          "Number": "A957/26",
+          "Relation": "",
+          "End": "25 MAY 2026 - 19:00"
+        },
+        {
+          "Number": "A954/26",
+          "Relation": "",
+          "End": "29 MAY 2026 - 23:59"
+        },
+        {
+          "Number": "A582/26-A853/26",
+          "Relation": "RNAV 35L/R DA 384 ft",
+          "End": "11 DEC 2026 - 17:29"
+        },
+        {
+          "Number": "A850/26",
+          "Relation": "We are not authorized to do RNAV(RNP)",
+          "End": "11 DEC 2026 - 17:27"
+        },
+        {
+          "Number": "A849/26",
+          "Relation": "LOC 35L MDA 460 ft",
+          "End": "11 DEC 2026 - 17:26"
+        },
+        {
+          "Number": "A843/26 A845/26",
+          "Relation": "RNAV 17L/R DA 384 ft",
+          "End": "11 DEC 2026 - 17:24"
+        },
+        {
+          "Number": "A840/26",
+          "Relation": "We are not authorized to do RNAV(RNP)",
+          "End": "11 DEC 2026 - 17:21"
+        },
+        {
+          "Number": "A841/26",
+          "Relation": "",
+          "End": "11 DEC 2026 - 17:20"
+        },
+        {
+          "Number": "A837/26",
+          "Relation": "We are not authorized to do RNAV(RNP)",
+          "End": "11 DEC 2026 - 17:19"
+        },
+        {
+          "Number": "A841/26",
+          "Relation": "",
+          "End": "11 DEC 2026 - 17:18"
+        },
+        {
+          "Number": "A841/26",
+          "Relation": "",
+          "End": "01 JUL 2026 - 21:00"
         }
       ]
     },
@@ -993,7 +1018,7 @@
         },
         {
           "Number": "A4115/25",
-          "Relation": "2 feet higher",
+          "Relation": "RNAV 15 DA 406 ft, 2 ft higher",
           "End": "20 OCT 2027 - 23:59"
         },
         {
@@ -1152,14 +1177,9 @@
       ],
       "NOTAMS": [
         {
-          "Number": "F502/26",
-          "Relation": "MSAS=Multi Funcitonal Satellite Augmentation System (Like WAAS), we not do SLS",
-          "End": ""
-        },
-        {
-          "Number": "F486/26-F489/26",
-          "Relation": "Time related, weather related, all 4 RWYs, Still has RNAV approach",
-          "End": ""
+          "Number": "F519/26 A530/26",
+          "Relation": "ALL RWYs CLSD daily 2130-0630L",
+          "End": "31 MAY 2026 - 21:30"
         },
         {
           "Number": "F461/26",
@@ -1256,6 +1276,11 @@
       ],
       "NOTAMS": [
         {
+          "Number": "J1112/26",
+          "Relation": "We are not authorized to use GBAS",
+          "End": "30 MAY 2026 - 21:00"
+        },
+        {
           "Number": "J1016/26-J1017/26",
           "Relation": "Many Lighting Systems U/S, Detail in Jepp",
           "End": "10 JUN 2026 - 15:00"
@@ -1276,9 +1301,19 @@
           "End": "31 MAY 2026 - 21:00"
         },
         {
+          "Number": "J908/26",
+          "Relation": "ILS 23 U/S, time related",
+          "End": "30 MAY 2026 - 21:00"
+        },
+        {
           "Number": "J957/26",
           "Relation": "RWY 16R/34L CLSD, time related",
           "End": "31 MAY 2026 - 21:00"
+        },
+        {
+          "Number": "J960/26",
+          "Relation": "RWY 05/23 CLSD, time related",
+          "End": "30 MAY 2026 - 21:00"
         },
         {
           "Number": "J905/26",
@@ -1555,6 +1590,11 @@
       "Name": "Fukuoka",
       "NOTAMS": [
         {
+          "Number": "P2331/26",
+          "Relation": "Near ROAH, ROMY, ROIG, ROYN",
+          "End": "17 AUG 2026 - 15:00"
+        },
+        {
           "Number": "P2030/26",
           "Relation": "Time related, REF AIP SUP 005/26",
           "End": ""
@@ -1578,11 +1618,6 @@
           "Number": "P2104/26",
           "Relation": "Time related, directly W of MOOSE-NORTH and SOUTH",
           "End": ""
-        },
-        {
-          "Number": "P806/26",
-          "Relation": "Near ROAH, ROMY, ROIG, ROYN",
-          "End": "18 MAY 2026 - 15:00"
         },
         {
           "Number": "X111/25",
