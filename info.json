@@ -210,6 +210,49 @@
       ]
     },
     {
+      "ICAO": "KOAK",
+      "Name": "Oakland San Francisco Bay",
+      "Runways": [
+        "10L-28R 1663x46",
+        "10R-28L 1894x46",
+        "12-30 3206x46",
+        "15-33 1029x23"
+      ],
+      "Available_Approaches": [
+        {
+          "RWY": "10L",
+          "APPs": ["RNAV MDA"]
+        },
+        {
+          "RWY": "10R",
+          "APPs": ["RNAV MDA", "VOR"]
+        },
+        {
+          "RWY": "12",
+          "APPs": ["ILS I", "RNAV"]
+        },
+        {
+          "RWY": "28L",
+          "APPs": ["RNAV"]
+        },
+        {
+          "RWY": "28R",
+          "APPs": ["ILS I", "RNAV"]
+        },
+        {
+          "RWY": "30",
+          "APPs": ["ILS 3", "RNAV"]
+        }
+      ],
+      "NOTAMS": [
+        {
+          "Number": "A566/26",
+          "Relation": "Still has RNAV approach",
+          "End": "20 MAY 2026 - 20:00"
+        }
+      ]
+    },
+    {
       "ICAO": "KPDX",
       "Name": "Portland INTL",
       "Runways": ["03-21 1829x46", "10L-28R 2995x46", "10R-28L 3353x46"],
@@ -559,7 +602,7 @@
         },
         {
           "Number": "A2496/26",
-          "Relation": "ILS/LOC 28R Sidestep 28L MDA 500 ft, 20 ft higher",
+          "Relation": "We are not authorized to do side-step",
           "End": "26 OCT 2026 - 12:22"
         },
         {
@@ -651,6 +694,116 @@
           "Number": "A1668/26-A1670/26",
           "Relation": "",
           "End": "03 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A1672/26",
+          "Relation": "",
+          "End": "03 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A1497/26",
+          "Relation": "For intersection TKOF 28L, unlikely to use",
+          "End": "01 JAN 2038 - 00:00"
+        },
+        {
+          "Number": "A1204/26",
+          "Relation": "",
+          "End": "08 JUL 2027 - 23:59"
+        },
+        {
+          "Number": "A1063/26",
+          "Relation": "",
+          "End": "04 MAR 2027 - 23:59"
+        },
+        {
+          "Number": "A1065/26",
+          "Relation": "",
+          "End": "31 MAY 2026 - 17:08"
+        },
+        {
+          "Number": "A1161/26",
+          "Relation": "",
+          "End": "30 JUL 2027 - 23:59"
+        },
+        {
+          "Number": "A1160/26",
+          "Relation": "",
+          "End": "30 JUN 2027 - 23:59"
+        },
+        {
+          "Number": "A623/26",
+          "Relation": "",
+          "End": "09 AUG 2027 - 23:59"
+        },
+        {
+          "Number": "A343/26-A348/26",
+          "Relation": "",
+          "End": "04 JUN 2027 - 23:00"
+        },
+        {
+          "Number": "A236/26",
+          "Relation": "",
+          "End": "04 NOV 2026 - 23:59"
+        },
+        {
+          "Number": "A223/26",
+          "Relation": "TIPP TOE VIS 28R NA",
+          "End": "15 JAN 2028 - 18:44"
+        },
+        {
+          "Number": "A5904/25",
+          "Relation": "",
+          "End": "30 JUN 2026 - 23:59"
+        },
+        {
+          "Number": "A5781/25",
+          "Relation": "ODP",
+          "End": "30 MAY 2026 - 14:27"
+        },
+        {
+          "Number": "A5783/25-A5784/25",
+          "Relation": "ILS 28L/R Missed Approach Procedure changed",
+          "End": "30 MAY 2026 - 14:27"
+        },
+        {
+          "Number": "A5241/25-A5244/25",
+          "Relation": "",
+          "End": "20 AUG 2026 - 23:59"
+        },
+        {
+          "Number": "A5203/25",
+          "Relation": "",
+          "End": "21 FEB 2027 - 02:00"
+        },
+        {
+          "Number": "A4693/25",
+          "Relation": "",
+          "End": "05 MAR 2027 - 01:00"
+        },
+        {
+          "Number": "A3694/25-A3697/25",
+          "Relation": "",
+          "End": "14 NOV 2026 - 23:59"
+        },
+        {
+          "Number": "A1753/25",
+          "Relation": "",
+          "End": "30 JUL 2026 - 01:00"
+        },
+        {
+          "Number": "A1037/25-A1040/25",
+          "Relation": "",
+          "End": "08 AUG 2026 - 01:00"
+        },
+        {
+          "Number": "A5647/24",
+          "Relation": "",
+          "End": "22 AUG 2026 - 23:59"
+        },
+        {
+          "Number": "O88/23",
+          "Relation": "",
+          "End": "31 DEC 2037 - 23:59"
         }
       ]
     },
