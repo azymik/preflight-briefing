@@ -246,9 +246,74 @@
       ],
       "NOTAMS": [
         {
-          "Number": "A566/26",
-          "Relation": "Still has RNAV approach",
-          "End": "20 MAY 2026 - 20:00"
+          "Number": "A1330/26",
+          "Relation": "ILS 30 CAT III NA",
+          "End": "26 JUN 2026 - 23:59"
+        },
+        {
+          "Number": "A1279/26",
+          "Relation": "RNAV 12 DA NA, MDA 500 ft",
+          "End": "29 MAY 2026 - 16:18"
+        },
+        {
+          "Number": "A1253/26",
+          "Relation": "",
+          "End": "29 MAY 2026 - 02:00"
+        },
+        {
+          "Number": "A1247/26",
+          "Relation": "ILS 12 NA 0700-1900L Mon-Fri",
+          "End": "30 JUN 2026 - 19:08"
+        },
+        {
+          "Number": "A1248/26",
+          "Relation": "We are not authorized to do RNAV(RNP)",
+          "End": "30 JUN 2026 - 19:08"
+        },
+        {
+          "Number": "A1236/26-A1237/26",
+          "Relation": "ILS 12/30 U/S",
+          "End": "28 AUG 2026 - 23:59"
+        },
+        {
+          "Number": "A725/26",
+          "Relation": "RNAV 10R MDA 500 ft",
+          "End": "30 JUN 2026 - 14:45"
+        },
+        {
+          "Number": "A726/26",
+          "Relation": "RNAV 12 DA 399 ft",
+          "End": "30 JUN 2026 - 14:45"
+        },
+        {
+          "Number": "A724/26",
+          "Relation": "",
+          "End": "29 MAY 2026 - 20:00"
+        },
+        {
+          "Number": "A709/26",
+          "Relation": "We are not authorized to do side-step",
+          "End": "24 JUL 2026 - 16:09"
+        },
+        {
+          "Number": "A707/26-A708/26",
+          "Relation": "",
+          "End": "24 JUL 2026 - 16:08"
+        },
+        {
+          "Number": "A2495/25",
+          "Relation": "We are not authorized to do RNAV(RNP)",
+          "End": "09 JUL 2026 - 06:00"
+        },
+        {
+          "Number": "A2493/25",
+          "Relation": "ILS 28R DA 257 ft",
+          "End": "07 JUL 2026 - 15:54"
+        },
+        {
+          "Number": "A2492/25",
+          "Relation": "We are not authorized to do LPV",
+          "End": "07 JUL 2026 - 15:53"
         }
       ]
     },
@@ -804,6 +869,36 @@
           "Number": "O88/23",
           "Relation": "",
           "End": "31 DEC 2037 - 23:59"
+        }
+      ]
+    },
+    {
+      "ICAO": "KSMF",
+      "Name": "Sacramento INTL",
+      "Runways": ["17L-35R 2623x46", "17R-35L 2621x46"],
+      "Available_Approaches": [
+        {
+          "RWY": "17L",
+          "APPs": ["ILS I", "RNAV"]
+        },
+        {
+          "RWY": "17R",
+          "APPs": ["ILS 3", "RNAV"]
+        },
+        {
+          "RWY": "35L",
+          "APPs": ["ILS I", "RNAV"]
+        },
+        {
+          "RWY": "35R",
+          "APPs": ["RNAV"]
+        }
+      ],
+      "NOTAMS": [
+        {
+          "Number": "A566/26",
+          "Relation": "Still has RNAV approach",
+          "End": "20 MAY 2026 - 20:00"
         }
       ]
     },
