@@ -24,6 +24,16 @@
       ],
       "NOTAMS": [
         {
+          "Number": "A1509/26",
+          "Relation": "05R/23L CLSD, Time related (1200-1230 Local)",
+          "End": "30 JUN 2026 - 04:30"
+        },
+        {
+          "Number": "A1508/26",
+          "Relation": "05L/23R CLSD, Time related (1100-1130 Local)",
+          "End": "30 JUN 2026 - 03:30"
+        },
+        {
           "Number": "A1139/26",
           "Relation": "Time related (0600-1900 Local)",
           "End": "31 MAY 2026 - 23:59"
@@ -47,6 +57,16 @@
           "Number": "A1031/26",
           "Relation": "Available for us, which is code letter E",
           "End": "10 JUL 2026 - 08:00"
+        },
+        {
+          "Number": "A981/26",
+          "Relation": "SCHED CLSD of 05R/23L suspended (1130-1200 Local)",
+          "End": "30 JUN 2026 - 04:00"
+        },
+        {
+          "Number": "A979/26",
+          "Relation": "SCHED CLSD of 05L/23R suspended (1030-1100 Local)",
+          "End": "30 JUN 2026 - 03:00"
         },
         {
           "Number": "U672/26",
@@ -85,7 +105,12 @@
         },
         {
           "Number": "X1270/3",
-          "Relation": "LT: 1130-1200 daily and 0100-0630 even days",
+          "Relation": "05L/23R CLSD LT: 1030-1100 daily and 0100-0630 odd days",
+          "End": "31 DEC 2037 - 23:59"
+        },
+        {
+          "Number": "X1270/3(1)",
+          "Relation": "05R/23L CLSD LT: 1130-1200 daily and 0100-0630 even days",
           "End": "31 DEC 2037 - 23:59"
         }
       ]
@@ -438,6 +463,194 @@
           "Number": "A2033/24",
           "Relation": "ILS 34C DME required (Chart: DME or RADAR required)",
           "End": "31 JUL 2026 - 14:36"
+        }
+      ]
+    },
+    {
+      "ICAO": "KSFO",
+      "Name": "San Francisco INTL",
+      "Runways": [
+        "01L-19R 2332x61",
+        "01R-19L 2637x61",
+        "10L-28R 3618x61",
+        "10R-28L 3469x61"
+      ],
+      "Available_Approaches": [
+        {
+          "RWY": "10L",
+          "APPs": ["RNAV"]
+        },
+        {
+          "RWY": "10R",
+          "APPs": ["RNAV MDA"]
+        },
+        {
+          "RWY": "19L",
+          "APPs": ["ILS I", "RNAV"]
+        },
+        {
+          "RWY": "19R",
+          "APPs": ["RNAV"]
+        },
+        {
+          "RWY": "28L",
+          "APPs": ["ILS I", "RNAV", "VIS"]
+        },
+        {
+          "RWY": "28R",
+          "APPs": ["ILS 3", "RNAV", "VIS"]
+        }
+      ],
+      "NOTAMS": [
+        {
+          "Number": "A2756/26",
+          "Relation": "SID Radar",
+          "End": "01 JUL 2026 - 14:55"
+        },
+        {
+          "Number": "A2757/26",
+          "Relation": "SID NW bound",
+          "End": "01 JUL 2026 - 14:55"
+        },
+        {
+          "Number": "A2705/26",
+          "Relation": "01R/19L CLSD, EXC TAX BTN F AND M (S of 10R/28L)",
+          "End": "30 JUN 2026 - 13:00"
+        },
+        {
+          "Number": "A2713/26-A2715/26",
+          "Relation": "",
+          "End": "29 MAY 2026 - 13:00"
+        },
+        {
+          "Number": "A2666/26",
+          "Relation": "RNAV 10L DA 714 ft, 220 ft higher",
+          "End": "30 DEC 2026 - 15:55"
+        },
+        {
+          "Number": "A2536/26",
+          "Relation": "",
+          "End": "29 MAY 2026 - 23:59"
+        },
+        {
+          "Number": "A2532/26",
+          "Relation": "",
+          "End": "29 MAY 2026 - 23:00"
+        },
+        {
+          "Number": "A2579/26",
+          "Relation": "SID Radar",
+          "End": "30 MAY 2026 - 19:50"
+        },
+        {
+          "Number": "A2533/26",
+          "Relation": "Parallel N of 10L/28R, on center part of airport",
+          "End": "05 JUN 2026 - 14:00"
+        },
+        {
+          "Number": "A2497/26",
+          "Relation": "We are not authorized to do RNAV(RNP)",
+          "End": "30 JUN 2026 - 20:44"
+        },
+        {
+          "Number": "A2498/26",
+          "Relation": "RNAV 10L DA 530 ft, 36 ft higher",
+          "End": "30 JUN 2026 - 20:44"
+        },
+        {
+          "Number": "A2496/26",
+          "Relation": "ILS/LOC 28R Sidestep 28L MDA 500 ft, 20 ft higher",
+          "End": "26 OCT 2026 - 12:22"
+        },
+        {
+          "Number": "A2367/26",
+          "Relation": "",
+          "End": "23 JUL 2027 - 23:59"
+        },
+        {
+          "Number": "A2316/26-A2318/26",
+          "Relation": "",
+          "End": "31 AUG 2027 - 23:59"
+        },
+        {
+          "Number": "A2372/26",
+          "Relation": "Parallel N of 10L/28R, on center part of airport",
+          "End": "28 AUG 2026 - 13:00"
+        },
+        {
+          "Number": "A2344/26",
+          "Relation": "N of terminal 3",
+          "End": "30 MAY 2026 - 13:00"
+        },
+        {
+          "Number": "A2333/26",
+          "Relation": "",
+          "End": "29 MAY 2026 - 20:00"
+        },
+        {
+          "Number": "A2332/26",
+          "Relation": "ATIS on 115.8 U/S",
+          "End": "29 MAY 2026 - 20:00"
+        },
+        {
+          "Number": "A2283/26 A2287/26-A2288/26",
+          "Relation": "",
+          "End": "01 JUN 2026 - 13:00"
+        },
+        {
+          "Number": "A2224/26",
+          "Relation": "",
+          "End": "03 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A2225/26",
+          "Relation": "ILS 19L U/S",
+          "End": "03 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A2226/26",
+          "Relation": "",
+          "End": "03 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A2227/26",
+          "Relation": "19L ALS U/S, minimum VIS changed",
+          "End": "03 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A2228/26",
+          "Relation": "19L PAPI U/S",
+          "End": "03 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A2229/26",
+          "Relation": "",
+          "End": "03 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A2194/26",
+          "Relation": "01L/19R CLSD",
+          "End": "02 OCT 2026 - 23:59"
+        },
+        {
+          "Number": "A2047/26",
+          "Relation": "We are not authorized to do RNAV(RNP)",
+          "End": "17 APR 2028 - 12:43"
+        },
+        {
+          "Number": "A1818/26",
+          "Relation": "E of terminal 2",
+          "End": "31 MAY 2026 - 12:00"
+        },
+        {
+          "Number": "A1753/26",
+          "Relation": "RNAV Y 10R TDZE -2 ft, MDA +2 ft",
+          "End": "10 NOV 2026 - 12:26"
+        },
+        {
+          "Number": "A1668/26-A1670/26",
+          "Relation": "",
+          "End": "03 OCT 2026 - 23:59"
         }
       ]
     },
