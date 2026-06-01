@@ -33,6 +33,12 @@
         top: 0;
         z-index: 100;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease-in-out; /* Added for scroll animation */
+      }
+
+      /* Added: Class to hide header on down-scroll */
+      .header-hidden {
+        transform: translateY(-100%);
       }
 
       .container {
@@ -89,8 +95,26 @@
         font-size: 1.2rem;
         border-radius: 8px;
         cursor: pointer;
+        margin-top: 0.5rem;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+
+      /* Added: Secondary Button for Setup Reset */
+      .btn-secondary {
+        background-color: #6c757d;
+        color: white;
+        border: none;
+        padding: 1rem;
+        width: 100%;
+        font-size: 1.2rem;
+        border-radius: 8px;
+        cursor: pointer;
         margin-top: 1rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      }
+      
+      .btn-secondary:active {
+        background-color: #5a6268;
       }
 
       /* Briefing View Styles */
@@ -240,7 +264,7 @@
     </style>
   </head>
   <body>
-    <header>
+    <header id="main-header">
       <button
         id="btn-setup"
         class="btn-setup-nav"
@@ -266,6 +290,10 @@
           <h2>Select & Sequence FIRs</h2>
           <ul id="firs-list" class="sequence-list"></ul>
         </div>
+        
+        <button class="btn-secondary" onclick="resetSetup()">
+          Reset (Alphabetical & Uncheck All)
+        </button>
 
         <button class="btn-primary" onclick="generateBriefing()">
           Apply Changes & View Briefing
@@ -291,6 +319,22 @@
         firs: [],
       };
 
+      // Added: Scroll listener for auto-hiding header
+      let lastScrollTop = 0;
+      const headerElement = document.getElementById("main-header");
+
+      window.addEventListener("scroll", () => {
+        let scrollTop = window.scrollY || document.documentElement.scrollTop;
+        if (scrollTop > lastScrollTop && scrollTop > headerElement.offsetHeight) {
+          // Scrolling down
+          headerElement.classList.add("header-hidden");
+        } else {
+          // Scrolling up
+          headerElement.classList.remove("header-hidden");
+        }
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
+      });
+
       window.onload = async () => {
         try {
           const response = await fetch("info.json?t=" + new Date().getTime(), {
@@ -305,7 +349,9 @@
 
           // 1. Retrieve saved color states
           let savedColorStates = {};
-          const storageColorData = localStorage.getItem("pilotBriefingColorStates");
+          const storageColorData = localStorage.getItem(
+            "pilotBriefingColorStates",
+          );
           if (storageColorData) {
             try {
               savedColorStates = JSON.parse(storageColorData);
@@ -316,7 +362,9 @@
 
           // 2. Retrieve saved sequence & selection configuration
           let savedConfig = null;
-          const storageConfigData = localStorage.getItem("pilotBriefingAppConfig");
+          const storageConfigData = localStorage.getItem(
+            "pilotBriefingAppConfig",
+          );
           if (storageConfigData) {
             try {
               savedConfig = JSON.parse(storageConfigData);
@@ -327,27 +375,36 @@
 
           // Helper to merge info.json data with local storage config data
           const mergeConfig = (fetchedItems, savedItems) => {
-            if (!savedItems) return fetchedItems.map(item => ({ ...item, selected: true }));
-            
+            if (!savedItems)
+              return fetchedItems.map((item) => ({ ...item, selected: true }));
+
             let merged = [];
             // Add saved items in their saved sequence
-            savedItems.forEach(savedItem => {
-              const found = fetchedItems.find(item => item.ICAO === savedItem.ICAO);
+            savedItems.forEach((savedItem) => {
+              const found = fetchedItems.find(
+                (item) => item.ICAO === savedItem.ICAO,
+              );
               if (found) {
                 merged.push({ ...found, selected: savedItem.selected });
               }
             });
             // Append any newly added data items not present in the saved state
-            fetchedItems.forEach(item => {
-              if (!merged.find(m => m.ICAO === item.ICAO)) {
+            fetchedItems.forEach((item) => {
+              if (!merged.find((m) => m.ICAO === item.ICAO)) {
                 merged.push({ ...item, selected: true });
               }
             });
             return merged;
           };
 
-          appState.airports = mergeConfig(briefingData.airports, savedConfig ? savedConfig.airports : null);
-          appState.firs = mergeConfig(briefingData.firs, savedConfig ? savedConfig.firs : null);
+          appState.airports = mergeConfig(
+            briefingData.airports,
+            savedConfig ? savedConfig.airports : null,
+          );
+          appState.firs = mergeConfig(
+            briefingData.firs,
+            savedConfig ? savedConfig.firs : null,
+          );
 
           // Apply color states to airports
           appState.airports = appState.airports.map((a) => ({
@@ -376,8 +433,14 @@
       // Saves the array sequence and selection bools
       function saveConfigState() {
         const config = {
-            airports: appState.airports.map(a => ({ ICAO: a.ICAO, selected: a.selected })),
-            firs: appState.firs.map(f => ({ ICAO: f.ICAO, selected: f.selected }))
+          airports: appState.airports.map((a) => ({
+            ICAO: a.ICAO,
+            selected: a.selected,
+          })),
+          firs: appState.firs.map((f) => ({
+            ICAO: f.ICAO,
+            selected: f.selected,
+          })),
         };
         localStorage.setItem("pilotBriefingAppConfig", JSON.stringify(config));
       }
@@ -422,6 +485,21 @@
         renderSetupList(type);
       }
 
+      // Added: Reset sequence to alphabetical and uncheck all
+      function resetSetup() {
+        const sortByIcao = (a, b) => a.ICAO.localeCompare(b.ICAO);
+
+        appState.airports.sort(sortByIcao);
+        appState.airports.forEach(item => item.selected = false);
+
+        appState.firs.sort(sortByIcao);
+        appState.firs.forEach(item => item.selected = false);
+
+        saveConfigState(); // Auto save after resetting
+        renderSetupList("airports");
+        renderSetupList("firs");
+      }
+
       function generateBriefing() {
         document.getElementById("setup-view").style.display = "none";
         document.getElementById("briefing-view").style.display = "flex";
@@ -429,6 +507,10 @@
 
         renderBriefingSection("airports", "airports-content");
         renderBriefingSection("firs", "firs-content");
+        
+        // Ensure header is visible when switching views
+        headerElement.classList.remove("header-hidden");
+        window.scrollTo(0, 0); 
       }
 
       function showSetup() {
@@ -437,6 +519,10 @@
         document.getElementById("btn-setup").style.display = "none";
         renderSetupList("airports");
         renderSetupList("firs");
+        
+        // Ensure header is visible when switching views
+        headerElement.classList.remove("header-hidden");
+        window.scrollTo(0, 0);
       }
 
       function renderBriefingSection(type, containerId) {
@@ -480,14 +566,18 @@
             });
             html += `</div><div><strong>Approaches:</strong><br>`;
 
-            if (item.Available_Approaches && item.Available_Approaches.length > 0) {
+            if (
+              item.Available_Approaches &&
+              item.Available_Approaches.length > 0
+            ) {
               item.Available_Approaches.forEach((app, rwyIdx) => {
                 html += `<div style="margin-bottom: 0.3rem; display: flex; align-items: center; flex-wrap: wrap;">`;
                 html += `<span style="font-size: 0.9em; font-weight: bold; color: #555; margin-right: 0.5rem; width: 35px;">${app.RWY}:</span>`;
 
                 app.APPs.forEach((approachName, appIdx) => {
                   let uniqueIdx = `${rwyIdx}-${appIdx}`;
-                  let colorClass = savedState.approaches[uniqueIdx] || "tag-green";
+                  let colorClass =
+                    savedState.approaches[uniqueIdx] || "tag-green";
                   // Added data-icao here for auto-save targeting
                   html += `<span class="tag tag-clickable ${colorClass}" data-icao="${item.ICAO}" data-type="approach" data-idx="${uniqueIdx}" onclick="cycleColor(this)">${approachName}</span>`;
                 });
@@ -553,7 +643,8 @@
             icao +
             "&format=raw";
 
-          const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(awcUrl);
+          const proxyUrl =
+            "https://corsproxy.io/?" + encodeURIComponent(awcUrl);
           const response = await fetch(proxyUrl);
 
           if (!response.ok) {
@@ -602,11 +693,13 @@
         const airport = appState.airports.find((a) => a.ICAO === icao);
         if (airport) {
           if (!airport.colorState) {
-              airport.colorState = { runways: {}, approaches: {} };
+            airport.colorState = { runways: {}, approaches: {} };
           }
-          if (type === "runway") airport.colorState.runways[idx] = newColorClass;
-          if (type === "approach") airport.colorState.approaches[idx] = newColorClass;
-          
+          if (type === "runway")
+            airport.colorState.runways[idx] = newColorClass;
+          if (type === "approach")
+            airport.colorState.approaches[idx] = newColorClass;
+
           persistStateToStorage();
         }
       }
