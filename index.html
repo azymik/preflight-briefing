@@ -43,7 +43,7 @@
 
       /* Setup View Styles */
       #setup-view {
-        display: flex;
+        display: none; /* Changed: Initially hidden */
         flex-direction: column;
         gap: 2rem;
       }
@@ -142,15 +142,6 @@
         }
       }
 
-      .tag {
-        display: inline-block;
-        background: #e9ecef;
-        padding: 0.25rem 0.5rem;
-        border-radius: 4px;
-        font-size: 0.85rem;
-        margin: 0.2rem;
-      }
-
       /* Scrollable NOTAMs Box */
       .notams-container {
         background: #fafafa;
@@ -159,7 +150,7 @@
         padding: 0.5rem;
         max-height: 250px;
         overflow-y: auto;
-        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+        -webkit-overflow-scrolling: touch;
       }
 
       .notam-item {
@@ -179,7 +170,7 @@
         margin-bottom: 0.25rem;
       }
 
-      .btn-back {
+      .btn-setup-nav {
         background: transparent;
         color: white;
         border: 1px solid white;
@@ -198,7 +189,6 @@
         border-radius: 4px;
         font-size: 0.85rem;
         margin: 0.2rem;
-        /* Add smooth transition and prevent text selection when clicking quickly */
         transition:
           background-color 0.2s,
           color 0.2s;
@@ -240,13 +230,6 @@
         cursor: pointer;
       }
 
-      .btn-save {
-        background: #28a745;
-        color: white;
-      }
-      .btn-save:active {
-        background: #218838;
-      }
       .btn-reset {
         background: #6c757d;
         color: white;
@@ -259,18 +242,17 @@
   <body>
     <header>
       <button
-        id="btn-back"
-        class="btn-back"
+        id="btn-setup"
+        class="btn-setup-nav"
         style="display: none"
         onclick="showSetup()"
       >
-        Back
+        Setup
       </button>
       <h2 style="margin: 0">Preflight Briefing</h2>
     </header>
 
     <div class="container">
-      <!-- SETUP VIEW -->
       <div id="setup-view">
         <div>
           <h2>Select & Sequence Airports</h2>
@@ -286,11 +268,10 @@
         </div>
 
         <button class="btn-primary" onclick="generateBriefing()">
-          Generate Briefing
+          Apply Changes & View Briefing
         </button>
       </div>
 
-      <!-- BRIEFING VIEW -->
       <div id="briefing-view">
         <div id="briefing-airports">
           <h2 class="section-title">Airports</h2>
@@ -303,14 +284,13 @@
         </div>
       </div>
     </div>
+
     <script>
-      // State Objects containing original data + selected flag
       let appState = {
         airports: [],
         firs: [],
       };
 
-      // Load data from info.json when the page loads
       window.onload = async () => {
         try {
           const response = await fetch("info.json?t=" + new Date().getTime(), {
@@ -323,49 +303,87 @@
 
           const briefingData = await response.json();
 
-          // --- NEW: Retrieve saved color states from local storage ---
+          // 1. Retrieve saved color states
           let savedColorStates = {};
-          const storageData = localStorage.getItem("pilotBriefingColorStates");
-          if (storageData) {
+          const storageColorData = localStorage.getItem("pilotBriefingColorStates");
+          if (storageColorData) {
             try {
-              savedColorStates = JSON.parse(storageData);
+              savedColorStates = JSON.parse(storageColorData);
             } catch (e) {
               console.error("Failed to parse saved color states", e);
             }
           }
 
-          // Initialize state with selected: true AND the saved color states
-          appState.airports = briefingData.airports.map((a) => ({
+          // 2. Retrieve saved sequence & selection configuration
+          let savedConfig = null;
+          const storageConfigData = localStorage.getItem("pilotBriefingAppConfig");
+          if (storageConfigData) {
+            try {
+              savedConfig = JSON.parse(storageConfigData);
+            } catch (e) {
+              console.error("Failed to parse config states", e);
+            }
+          }
+
+          // Helper to merge info.json data with local storage config data
+          const mergeConfig = (fetchedItems, savedItems) => {
+            if (!savedItems) return fetchedItems.map(item => ({ ...item, selected: true }));
+            
+            let merged = [];
+            // Add saved items in their saved sequence
+            savedItems.forEach(savedItem => {
+              const found = fetchedItems.find(item => item.ICAO === savedItem.ICAO);
+              if (found) {
+                merged.push({ ...found, selected: savedItem.selected });
+              }
+            });
+            // Append any newly added data items not present in the saved state
+            fetchedItems.forEach(item => {
+              if (!merged.find(m => m.ICAO === item.ICAO)) {
+                merged.push({ ...item, selected: true });
+              }
+            });
+            return merged;
+          };
+
+          appState.airports = mergeConfig(briefingData.airports, savedConfig ? savedConfig.airports : null);
+          appState.firs = mergeConfig(briefingData.firs, savedConfig ? savedConfig.firs : null);
+
+          // Apply color states to airports
+          appState.airports = appState.airports.map((a) => ({
             ...a,
-            selected: true,
-            // Inject saved state if it exists for this ICAO, otherwise use default empty structure
             colorState: savedColorStates[a.ICAO] || {
               runways: {},
               approaches: {},
             },
           }));
 
-          appState.firs = briefingData.firs.map((f) => ({
-            ...f,
-            selected: true,
-          }));
-
-          // Render the UI
-          renderSetupList("airports");
-          renderSetupList("firs");
+          // Trigger generation immediately so Briefing is the first page
+          generateBriefing();
         } catch (error) {
           console.error("Failed to load info.json:", error);
-          document.getElementById("setup-view").innerHTML = `
-      <div style="background: #fee; padding: 1rem; border: 1px solid #f99; border-radius: 8px;">
-        <h3 style="color: #c00; margin-top:0;">Error loading data</h3>
-        <p>Could not load <strong>info.json</strong>. Ensure the file is in the same folder as index.html.</p>
-      </div>
-    `;
+          const setupView = document.getElementById("setup-view");
+          setupView.style.display = "flex";
+          setupView.innerHTML = `
+            <div style="background: #fee; padding: 1rem; border: 1px solid #f99; border-radius: 8px;">
+              <h3 style="color: #c00; margin-top:0;">Error loading data</h3>
+              <p>Could not load <strong>info.json</strong>. Ensure the file is in the same folder as index.html.</p>
+            </div>
+          `;
         }
       };
 
+      // Saves the array sequence and selection bools
+      function saveConfigState() {
+        const config = {
+            airports: appState.airports.map(a => ({ ICAO: a.ICAO, selected: a.selected })),
+            firs: appState.firs.map(f => ({ ICAO: f.ICAO, selected: f.selected }))
+        };
+        localStorage.setItem("pilotBriefingAppConfig", JSON.stringify(config));
+      }
+
       function renderSetupList(type) {
-        const listEl = document.getElementById(`${type}-list`); // Ensure HTML uses ids "airports-list" and "firs-list"
+        const listEl = document.getElementById(`${type}-list`);
         listEl.innerHTML = "";
 
         appState[type].forEach((item, index) => {
@@ -373,40 +391,41 @@
           li.className = "sequence-item";
 
           li.innerHTML = `
-                <div>
-                    <input type="checkbox" id="${type}-${index}" ${item.selected ? "checked" : ""} 
-                           onchange="toggleSelection('${type}', ${index})">
-                    <label for="${type}-${index}" style="font-weight:bold; margin-left:10px;">${item.ICAO} - ${item.Name}</label>
-                </div>
-                <div class="controls">
-                    <button onclick="moveItem('${type}', ${index}, -1)" ${index === 0 ? "disabled" : ""}>&#8593;</button>
-                    <button onclick="moveItem('${type}', ${index}, 1)" ${index === appState[type].length - 1 ? "disabled" : ""}>&#8595;</button>
-                </div>
-            `;
+            <div>
+              <input type="checkbox" id="${type}-${index}" ${item.selected ? "checked" : ""} 
+                     onchange="toggleSelection('${type}', ${index})">
+              <label for="${type}-${index}" style="font-weight:bold; margin-left:10px;">${item.ICAO} - ${item.Name}</label>
+            </div>
+            <div class="controls">
+              <button onclick="moveItem('${type}', ${index}, -1)" ${index === 0 ? "disabled" : ""}>&#8593;</button>
+              <button onclick="moveItem('${type}', ${index}, 1)" ${index === appState[type].length - 1 ? "disabled" : ""}>&#8595;</button>
+            </div>
+          `;
           listEl.appendChild(li);
         });
       }
 
       function toggleSelection(type, index) {
         appState[type][index].selected = !appState[type][index].selected;
+        saveConfigState(); // Auto save config on toggle
       }
 
       function moveItem(type, index, direction) {
         const targetIndex = index + direction;
         if (targetIndex < 0 || targetIndex >= appState[type].length) return;
 
-        // Swap elements
         const temp = appState[type][index];
         appState[type][index] = appState[type][targetIndex];
         appState[type][targetIndex] = temp;
 
+        saveConfigState(); // Auto save config on move
         renderSetupList(type);
       }
 
       function generateBriefing() {
         document.getElementById("setup-view").style.display = "none";
         document.getElementById("briefing-view").style.display = "flex";
-        document.getElementById("btn-back").style.display = "block";
+        document.getElementById("btn-setup").style.display = "block";
 
         renderBriefingSection("airports", "airports-content");
         renderBriefingSection("firs", "firs-content");
@@ -415,7 +434,9 @@
       function showSetup() {
         document.getElementById("setup-view").style.display = "flex";
         document.getElementById("briefing-view").style.display = "none";
-        document.getElementById("btn-back").style.display = "none";
+        document.getElementById("btn-setup").style.display = "none";
+        renderSetupList("airports");
+        renderSetupList("firs");
       }
 
       function renderBriefingSection(type, containerId) {
@@ -433,78 +454,60 @@
           const card = document.createElement("div");
           card.className = "card";
 
-          // Build Base HTML
           let html = `<div class="card-header">
               <h3>${item.ICAO} - ${item.Name}</h3>`;
 
-          // Add Save and Reset buttons only for airports
           if (type === "airports") {
+            // Only keeping the reset button, manual save button is removed.
             html += `
-        <div class="airport-actions">
-            <button class="btn-action btn-save" onclick="saveColors('${item.ICAO}', this)">Save</button>
-            <button class="btn-action btn-reset" onclick="resetColors('${item.ICAO}')">Reset</button>
-        </div>
-    `;
+              <div class="airport-actions">
+                  <button class="btn-action btn-reset" onclick="resetColors('${item.ICAO}')">Reset Colors</button>
+              </div>
+            `;
           }
 
           html += `</div>
-         <div class="info-grid" id="grid-${item.ICAO}">`; // Added ID for targeting
+             <div class="info-grid" id="grid-${item.ICAO}">`;
 
-          // If it's an airport, add runways and approaches
           if (type === "airports") {
-            // Load saved color states if they exist, otherwise default to empty objects
             let savedState = item.colorState || { runways: {}, approaches: {} };
 
             html += `<div><strong>Runways:</strong><br>`;
             item.Runways.forEach((r, idx) => {
-              let colorClass = savedState.runways[idx] || "tag-green"; // Default green
-              html += `<span class="tag tag-clickable ${colorClass}" data-type="runway" data-idx="${idx}" onclick="cycleColor(this)">${r}</span>`;
+              let colorClass = savedState.runways[idx] || "tag-green";
+              // Added data-icao here for auto-save targeting
+              html += `<span class="tag tag-clickable ${colorClass}" data-icao="${item.ICAO}" data-type="runway" data-idx="${idx}" onclick="cycleColor(this)">${r}</span>`;
             });
             html += `</div><div><strong>Approaches:</strong><br>`;
 
-            if (
-              item.Available_Approaches &&
-              item.Available_Approaches.length > 0
-            ) {
-              // Loop through each runway
+            if (item.Available_Approaches && item.Available_Approaches.length > 0) {
               item.Available_Approaches.forEach((app, rwyIdx) => {
-                // Create a wrapper for the runway label
                 html += `<div style="margin-bottom: 0.3rem; display: flex; align-items: center; flex-wrap: wrap;">`;
                 html += `<span style="font-size: 0.9em; font-weight: bold; color: #555; margin-right: 0.5rem; width: 35px;">${app.RWY}:</span>`;
 
-                // Loop through each individual approach for this runway
                 app.APPs.forEach((approachName, appIdx) => {
-                  // Create a unique ID for this specific button (e.g., "0-1", "2-0")
                   let uniqueIdx = `${rwyIdx}-${appIdx}`;
-
-                  // Load saved state using the unique index
-                  let colorClass =
-                    savedState.approaches[uniqueIdx] || "tag-green";
-
-                  // Create the individual clickable tag
-                  html += `<span class="tag tag-clickable ${colorClass}" data-type="approach" data-idx="${uniqueIdx}" onclick="cycleColor(this)">${approachName}</span>`;
+                  let colorClass = savedState.approaches[uniqueIdx] || "tag-green";
+                  // Added data-icao here for auto-save targeting
+                  html += `<span class="tag tag-clickable ${colorClass}" data-icao="${item.ICAO}" data-type="approach" data-idx="${uniqueIdx}" onclick="cycleColor(this)">${approachName}</span>`;
                 });
 
-                html += `</div>`; // Close the runway wrapper
+                html += `</div>`;
               });
             } else {
               html += `<span class="tag" style="background:#ffdada">No Data/Charts</span>`;
             }
             html += `</div>`;
           }
-          html += `</div>`; // Close info grid
+          html += `</div>`;
 
-          // --- NEW TAF SECTION ---
-          // Wrap this in an 'if' statement so it ONLY renders for airports
           if (type === "airports") {
             html += `<div style="margin-top: 1rem;">
-                            <strong>Latest TAF:</strong>
-                            <div id="taf-${item.ICAO}" style="font-family: monospace; font-size: 0.9rem; background: #e8f4fd; padding: 0.75rem; border-radius: 6px; border: 1px solid #b8daff; white-space: pre-wrap; margin-top: 0.25rem;">Fetching TAF...</div>
-                         </div>`;
+                        <strong>Latest TAF:</strong>
+                        <div id="taf-${item.ICAO}" style="font-family: monospace; font-size: 0.9rem; background: #e8f4fd; padding: 0.75rem; border-radius: 6px; border: 1px solid #b8daff; white-space: pre-wrap; margin-top: 0.25rem;">Fetching TAF...</div>
+                     </div>`;
           }
-          // -----------------------
 
-          // Add NOTAMS in a scrollable container
           html += `<strong>NOTAMs (${item.NOTAMS ? item.NOTAMS.length : 0}):</strong>`;
           html += `<div class="notams-container">`;
 
@@ -520,11 +523,11 @@
               }
 
               html += `
-        <div class="notam-item">
-            <span class="notam-number">${num} ${endBadge}</span>
-            <span style="display: block; margin-top: 4px;">${rel}</span>
-        </div>
-    `;
+                <div class="notam-item">
+                    <span class="notam-number">${num} ${endBadge}</span>
+                    <span style="display: block; margin-top: 4px;">${rel}</span>
+                </div>
+              `;
             });
           } else {
             html += `<div class="notam-item">No active NOTAMs recorded.</div>`;
@@ -534,33 +537,23 @@
           card.innerHTML = html;
           container.appendChild(card);
 
-          // --- NEW TRIGGER ---
-          // If we just drew an airport, trigger the API fetch using its ICAO code
           if (type === "airports") {
             fetchTafData(item.ICAO);
           }
-          // -------------------
         });
       }
 
-      // Function to fetch and display TAF data from AviationWeather.gov via a CORS proxy
       async function fetchTafData(icao) {
         const tafElement = document.getElementById("taf-" + icao);
         if (!tafElement) return;
 
         try {
-          // 1. Define the actual AviationWeather endpoint
           const awcUrl =
             "https://aviationweather.gov/api/data/taf?ids=" +
             icao +
             "&format=raw";
 
-          // 2. Wrap the URL in a public CORS proxy
-          // encodeURIComponent ensures the ?ids=... formatting doesn't break the proxy request
-          const proxyUrl =
-            "https://corsproxy.io/?" + encodeURIComponent(awcUrl);
-
-          // Fetch using the proxy
+          const proxyUrl = "https://corsproxy.io/?" + encodeURIComponent(awcUrl);
           const response = await fetch(proxyUrl);
 
           if (!response.ok) {
@@ -581,56 +574,41 @@
             "<span style='color: #d9534f;'>Failed to load TAF. Check internet connection or proxy status.</span>";
         }
       }
-      // --- NEW COLOR CYCLING AND STATE MANAGEMENT FUNCTIONS ---
 
       function cycleColor(element) {
+        // 1. Handle Visual Class Cycling
+        let newColorClass = "tag-green";
         if (element.classList.contains("tag-green")) {
           element.classList.remove("tag-green");
           element.classList.add("tag-yellow");
+          newColorClass = "tag-yellow";
         } else if (element.classList.contains("tag-yellow")) {
           element.classList.remove("tag-yellow");
           element.classList.add("tag-red");
+          newColorClass = "tag-red";
         } else if (element.classList.contains("tag-red")) {
           element.classList.remove("tag-red");
           element.classList.add("tag-green");
+          newColorClass = "tag-green";
         } else {
-          // Failsafe default
           element.classList.add("tag-green");
         }
-      }
 
-      function saveColors(icao, btnElement) {
+        // 2. Perform Auto-Save
+        const icao = element.getAttribute("data-icao");
+        const type = element.getAttribute("data-type");
+        const idx = element.getAttribute("data-idx");
+
         const airport = appState.airports.find((a) => a.ICAO === icao);
-        if (!airport) return;
-
-        airport.colorState = { runways: {}, approaches: {} };
-
-        const grid = document.getElementById(`grid-${icao}`);
-        const tags = grid.querySelectorAll(".tag[data-type]");
-
-        tags.forEach((tag) => {
-          const type = tag.getAttribute("data-type");
-          const idx = tag.getAttribute("data-idx");
-
-          let colorClass = "tag-green";
-          if (tag.classList.contains("tag-yellow")) colorClass = "tag-yellow";
-          if (tag.classList.contains("tag-red")) colorClass = "tag-red";
-
-          if (type === "runway") airport.colorState.runways[idx] = colorClass;
-          if (type === "approach")
-            airport.colorState.approaches[idx] = colorClass;
-        });
-
-        // --- NEW: Save to local storage ---
-        persistStateToStorage();
-
-        const originalText = btnElement.innerText;
-        btnElement.innerText = "Saved!";
-        btnElement.style.background = "#1e7e34";
-        setTimeout(() => {
-          btnElement.innerText = originalText;
-          btnElement.style.background = "";
-        }, 1000);
+        if (airport) {
+          if (!airport.colorState) {
+              airport.colorState = { runways: {}, approaches: {} };
+          }
+          if (type === "runway") airport.colorState.runways[idx] = newColorClass;
+          if (type === "approach") airport.colorState.approaches[idx] = newColorClass;
+          
+          persistStateToStorage();
+        }
       }
 
       function resetColors(icao) {
@@ -646,16 +624,13 @@
         const airport = appState.airports.find((a) => a.ICAO === icao);
         if (airport) {
           airport.colorState = { runways: {}, approaches: {} };
-          // --- NEW: Update local storage to reflect the reset ---
-          persistStateToStorage();
+          persistStateToStorage(); // Auto-save after reset
         }
       }
 
       function persistStateToStorage() {
-        // We only want to save the color states, not the entire info.json dataset
         const stateToSave = {};
         appState.airports.forEach((airport) => {
-          // Only save if there's actually a colorState defined
           if (airport.colorState) {
             stateToSave[airport.ICAO] = airport.colorState;
           }
