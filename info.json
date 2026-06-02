@@ -427,6 +427,19 @@
       ]
     },
     {
+      "ICAO": "KSAC",
+      "Name": "Sacramento Executive",
+      "Runways": ["02-20 1677x46", "12-30 1170x30"],
+      "Available_Approaches": [],
+      "NOTAMS": [
+        {
+          "Number": "A290/26",
+          "Relation": "VOR U/S",
+          "End": "03 JUN 2026 - 20:00"
+        }
+      ]
+    },
+    {
       "ICAO": "KSEA",
       "Name": "Seattle-Tacoma INTL",
       "Runways": ["16L-34R 3627x46", "16C-34C 2873x46", "16R-34L 2591x46"],
@@ -924,6 +937,43 @@
           "Number": "A841/26",
           "Relation": "",
           "End": "01 JUL 2026 - 21:00"
+        }
+      ]
+    },
+    {
+      "ICAO": "PACD",
+      "Name": "Cold Bay",
+      "Runways": ["08-26 1494x46", "15-33 3103x46"],
+      "Available_Approaches": [
+        {
+          "RWY": "15",
+          "APPs": ["ILS I", "VOR"]
+        },
+        {
+          "RWY": "33",
+          "APPs": ["LOC", "RNAV"]
+        }
+      ],
+      "NOTAMS": [
+        {
+          "Number": "A8268/26",
+          "Relation": "SID",
+          "End": "03 JUN 2026 - 11:17"
+        },
+        {
+          "Number": "A8270/26",
+          "Relation": "ILS 15, LOC 33 require RNAV with GPS",
+          "End": "03 JUN 2026 - 11:17"
+        },
+        {
+          "Number": "A7812/26",
+          "Relation": "LOC 33 require RNAV with GPS",
+          "End": "04 JUN 2026 - 22:31"
+        },
+        {
+          "Number": "A7813/26",
+          "Relation": "ILS 15 require RNAV with GPS, Missed Approach Procedure changed",
+          "End": "04 JUN 2026 - 22:31"
         }
       ]
     },
@@ -1531,6 +1581,22 @@
           "Number": "A467/26",
           "Relation": "Time related, in Oceanic W of USA, upto FL230",
           "End": "02 JUN 2026 - 07:00"
+        },
+        {
+          "Number": "A46/22",
+          "Relation": "Transponder requirements",
+          "End": "01 JAN 2038 - 00:00"
+        }
+      ]
+    },
+    {
+      "ICAO": "KZOA",
+      "Name": "Oakland Lower",
+      "NOTAMS": [
+        {
+          "Number": "A519/26 A437/26 A2/26 A1394/25 A1395/25 A1397/25",
+          "Relation": "ADS-R, TIS-B, FIS-B may not be available",
+          "End": "22 JUN 2026 - 22:00"
         },
         {
           "Number": "A46/22",
