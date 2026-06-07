@@ -33,10 +33,9 @@
         top: 0;
         z-index: 100;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out; /* Added for scroll animation */
+        transition: transform 0.3s ease-in-out;
       }
 
-      /* Added: Class to hide header on down-scroll */
       .header-hidden {
         transform: translateY(-100%);
       }
@@ -47,9 +46,8 @@
         margin: 0 auto;
       }
 
-      /* Setup View Styles */
       #setup-view {
-        display: none; /* Changed: Initially hidden */
+        display: none;
         flex-direction: column;
         gap: 2rem;
       }
@@ -99,7 +97,6 @@
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
 
-      /* Added: Secondary Button for Setup Reset */
       .btn-secondary {
         background-color: #6c757d;
         color: white;
@@ -112,12 +109,11 @@
         margin-top: 1rem;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
       }
-      
+
       .btn-secondary:active {
         background-color: #5a6268;
       }
 
-      /* Briefing View Styles */
       #briefing-view {
         display: none;
         flex-direction: column;
@@ -166,7 +162,6 @@
         }
       }
 
-      /* Scrollable NOTAMs Box */
       .notams-container {
         background: #fafafa;
         border: 1px solid #ddd;
@@ -206,17 +201,46 @@
         top: 1rem;
       }
 
-      /* Tag Color States */
+      /* Note Container additions */
+      .note-container {
+        display: inline-flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 0.2rem;
+        vertical-align: top;
+      }
+
       .tag {
         display: inline-block;
         padding: 0.25rem 0.5rem;
         border-radius: 4px;
         font-size: 0.85rem;
-        margin: 0.2rem;
+        margin: 0; /* Margin moved to container */
         transition:
           background-color 0.2s,
           color 0.2s;
         user-select: none;
+        text-align: center;
+      }
+
+      .tag-note {
+        display: none;
+        margin-top: 0.25rem;
+        width: 100%;
+        min-width: 100px;
+        height: 45px;
+        font-size: 0.8rem;
+        font-family: inherit;
+        resize: vertical;
+        border: 1px solid var(--border);
+        border-radius: 4px;
+        padding: 4px;
+        box-sizing: border-box;
+        background-color: #fffdf5;
+      }
+
+      .tag-note.visible {
+        display: block;
       }
 
       .tag-clickable {
@@ -239,7 +263,6 @@
         border: 1px solid #f5c6cb;
       }
 
-      /* Header Actions */
       .airport-actions {
         display: flex;
         gap: 0.5rem;
@@ -290,7 +313,7 @@
           <h2>Select & Sequence FIRs</h2>
           <ul id="firs-list" class="sequence-list"></ul>
         </div>
-        
+
         <button class="btn-secondary" onclick="resetSetup()">
           Reset (Alphabetical & Uncheck All)
         </button>
@@ -319,20 +342,20 @@
         firs: [],
       };
 
-      // Added: Scroll listener for auto-hiding header
       let lastScrollTop = 0;
       const headerElement = document.getElementById("main-header");
 
       window.addEventListener("scroll", () => {
         let scrollTop = window.scrollY || document.documentElement.scrollTop;
-        if (scrollTop > lastScrollTop && scrollTop > headerElement.offsetHeight) {
-          // Scrolling down
+        if (
+          scrollTop > lastScrollTop &&
+          scrollTop > headerElement.offsetHeight
+        ) {
           headerElement.classList.add("header-hidden");
         } else {
-          // Scrolling up
           headerElement.classList.remove("header-hidden");
         }
-        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For mobile or negative scrolling
+        lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
       });
 
       window.onload = async () => {
@@ -347,7 +370,6 @@
 
           const briefingData = await response.json();
 
-          // 1. Retrieve saved color states
           let savedColorStates = {};
           const storageColorData = localStorage.getItem(
             "pilotBriefingColorStates",
@@ -360,7 +382,6 @@
             }
           }
 
-          // 2. Retrieve saved sequence & selection configuration
           let savedConfig = null;
           const storageConfigData = localStorage.getItem(
             "pilotBriefingAppConfig",
@@ -373,13 +394,11 @@
             }
           }
 
-          // Helper to merge info.json data with local storage config data
           const mergeConfig = (fetchedItems, savedItems) => {
             if (!savedItems)
               return fetchedItems.map((item) => ({ ...item, selected: true }));
 
             let merged = [];
-            // Add saved items in their saved sequence
             savedItems.forEach((savedItem) => {
               const found = fetchedItems.find(
                 (item) => item.ICAO === savedItem.ICAO,
@@ -388,7 +407,6 @@
                 merged.push({ ...found, selected: savedItem.selected });
               }
             });
-            // Append any newly added data items not present in the saved state
             fetchedItems.forEach((item) => {
               if (!merged.find((m) => m.ICAO === item.ICAO)) {
                 merged.push({ ...item, selected: true });
@@ -406,16 +424,25 @@
             savedConfig ? savedConfig.firs : null,
           );
 
-          // Apply color states to airports
-          appState.airports = appState.airports.map((a) => ({
-            ...a,
-            colorState: savedColorStates[a.ICAO] || {
+          // Apply color states and ensure notes objects exist
+          appState.airports = appState.airports.map((a) => {
+            let cs = savedColorStates[a.ICAO] || {
               runways: {},
               approaches: {},
-            },
-          }));
+              runwayNotes: {},
+              approachNotes: {},
+            };
+            
+            // Retrofit older saves that might not have notes
+            if (!cs.runwayNotes) cs.runwayNotes = {};
+            if (!cs.approachNotes) cs.approachNotes = {};
 
-          // Trigger generation immediately so Briefing is the first page
+            return {
+              ...a,
+              colorState: cs,
+            };
+          });
+
           generateBriefing();
         } catch (error) {
           console.error("Failed to load info.json:", error);
@@ -430,7 +457,6 @@
         }
       };
 
-      // Saves the array sequence and selection bools
       function saveConfigState() {
         const config = {
           airports: appState.airports.map((a) => ({
@@ -470,7 +496,7 @@
 
       function toggleSelection(type, index) {
         appState[type][index].selected = !appState[type][index].selected;
-        saveConfigState(); // Auto save config on toggle
+        saveConfigState();
       }
 
       function moveItem(type, index, direction) {
@@ -481,21 +507,20 @@
         appState[type][index] = appState[type][targetIndex];
         appState[type][targetIndex] = temp;
 
-        saveConfigState(); // Auto save config on move
+        saveConfigState();
         renderSetupList(type);
       }
 
-      // Added: Reset sequence to alphabetical and uncheck all
       function resetSetup() {
         const sortByIcao = (a, b) => a.ICAO.localeCompare(b.ICAO);
 
         appState.airports.sort(sortByIcao);
-        appState.airports.forEach(item => item.selected = false);
+        appState.airports.forEach((item) => (item.selected = false));
 
         appState.firs.sort(sortByIcao);
-        appState.firs.forEach(item => item.selected = false);
+        appState.firs.forEach((item) => (item.selected = false));
 
-        saveConfigState(); // Auto save after resetting
+        saveConfigState();
         renderSetupList("airports");
         renderSetupList("firs");
       }
@@ -507,10 +532,9 @@
 
         renderBriefingSection("airports", "airports-content");
         renderBriefingSection("firs", "firs-content");
-        
-        // Ensure header is visible when switching views
+
         headerElement.classList.remove("header-hidden");
-        window.scrollTo(0, 0); 
+        window.scrollTo(0, 0);
       }
 
       function showSetup() {
@@ -519,8 +543,7 @@
         document.getElementById("btn-setup").style.display = "none";
         renderSetupList("airports");
         renderSetupList("firs");
-        
-        // Ensure header is visible when switching views
+
         headerElement.classList.remove("header-hidden");
         window.scrollTo(0, 0);
       }
@@ -544,7 +567,6 @@
               <h3>${item.ICAO} - ${item.Name}</h3>`;
 
           if (type === "airports") {
-            // Only keeping the reset button, manual save button is removed.
             html += `
               <div class="airport-actions">
                   <button class="btn-action btn-reset" onclick="resetColors('${item.ICAO}')">Reset Colors</button>
@@ -556,36 +578,44 @@
              <div class="info-grid" id="grid-${item.ICAO}">`;
 
           if (type === "airports") {
-            let savedState = item.colorState || { runways: {}, approaches: {} };
+            let savedState = item.colorState || { runways: {}, approaches: {}, runwayNotes: {}, approachNotes: {} };
 
-            html += `<div><strong>Runways:</strong><br>`;
+            html += `<div><strong>Runways:</strong><br><div style="display: flex; flex-wrap: wrap;">`;
             item.Runways.forEach((r, idx) => {
               let colorClass = savedState.runways[idx] || "tag-green";
-              // Added data-icao here for auto-save targeting
-              html += `<span class="tag tag-clickable ${colorClass}" data-icao="${item.ICAO}" data-type="runway" data-idx="${idx}" onclick="cycleColor(this)">${r}</span>`;
+              let noteValue = savedState.runwayNotes[idx] || "";
+              let visibleClass = colorClass !== "tag-green" ? "visible" : "";
+              
+              html += `<div class="note-container">
+                         <span class="tag tag-clickable ${colorClass}" data-icao="${item.ICAO}" data-type="runway" data-idx="${idx}" onclick="cycleColor(this)">${r}</span>
+                         <textarea class="tag-note ${visibleClass}" data-icao="${item.ICAO}" data-type="runway" data-idx="${idx}" oninput="autoSaveNote(this)" placeholder="Reason...">${noteValue}</textarea>
+                       </div>`;
             });
-            html += `</div><div><strong>Approaches:</strong><br>`;
+            html += `</div></div><div><strong>Approaches:</strong><br>`;
 
             if (
               item.Available_Approaches &&
               item.Available_Approaches.length > 0
             ) {
               item.Available_Approaches.forEach((app, rwyIdx) => {
-                html += `<div style="margin-bottom: 0.3rem; display: flex; align-items: center; flex-wrap: wrap;">`;
-                html += `<span style="font-size: 0.9em; font-weight: bold; color: #555; margin-right: 0.5rem; width: 35px;">${app.RWY}:</span>`;
-
+                html += `<div style="margin-bottom: 0.5rem; display: flex; align-items: flex-start; flex-wrap: wrap;">`;
+                html += `<span style="font-size: 0.9em; font-weight: bold; color: #555; margin-top: 0.4rem; margin-right: 0.5rem; width: 35px;">${app.RWY}:</span>`;
+                html += `<div style="display: flex; flex-wrap: wrap; flex: 1;">`;
                 app.APPs.forEach((approachName, appIdx) => {
                   let uniqueIdx = `${rwyIdx}-${appIdx}`;
-                  let colorClass =
-                    savedState.approaches[uniqueIdx] || "tag-green";
-                  // Added data-icao here for auto-save targeting
-                  html += `<span class="tag tag-clickable ${colorClass}" data-icao="${item.ICAO}" data-type="approach" data-idx="${uniqueIdx}" onclick="cycleColor(this)">${approachName}</span>`;
-                });
+                  let colorClass = savedState.approaches[uniqueIdx] || "tag-green";
+                  let noteValue = savedState.approachNotes[uniqueIdx] || "";
+                  let visibleClass = colorClass !== "tag-green" ? "visible" : "";
 
-                html += `</div>`;
+                  html += `<div class="note-container">
+                             <span class="tag tag-clickable ${colorClass}" data-icao="${item.ICAO}" data-type="approach" data-idx="${uniqueIdx}" onclick="cycleColor(this)">${approachName}</span>
+                             <textarea class="tag-note ${visibleClass}" data-icao="${item.ICAO}" data-type="approach" data-idx="${uniqueIdx}" oninput="autoSaveNote(this)" placeholder="Reason...">${noteValue}</textarea>
+                           </div>`;
+                });
+                html += `</div></div>`;
               });
             } else {
-              html += `<span class="tag" style="background:#ffdada">No Data/Charts</span>`;
+              html += `<span class="tag" style="background:#ffdada; margin:0.2rem;">No Data/Charts</span>`;
             }
             html += `</div>`;
           }
@@ -667,7 +697,6 @@
       }
 
       function cycleColor(element) {
-        // 1. Handle Visual Class Cycling
         let newColorClass = "tag-green";
         if (element.classList.contains("tag-green")) {
           element.classList.remove("tag-green");
@@ -685,7 +714,17 @@
           element.classList.add("tag-green");
         }
 
-        // 2. Perform Auto-Save
+        // Toggle textarea visibility
+        const container = element.parentElement;
+        const textarea = container.querySelector('.tag-note');
+        if (textarea) {
+            if (newColorClass === 'tag-green') {
+                textarea.classList.remove('visible');
+            } else {
+                textarea.classList.add('visible');
+            }
+        }
+
         const icao = element.getAttribute("data-icao");
         const type = element.getAttribute("data-type");
         const idx = element.getAttribute("data-idx");
@@ -693,12 +732,32 @@
         const airport = appState.airports.find((a) => a.ICAO === icao);
         if (airport) {
           if (!airport.colorState) {
-            airport.colorState = { runways: {}, approaches: {} };
+            airport.colorState = { runways: {}, approaches: {}, runwayNotes: {}, approachNotes: {} };
           }
           if (type === "runway")
             airport.colorState.runways[idx] = newColorClass;
           if (type === "approach")
             airport.colorState.approaches[idx] = newColorClass;
+
+          persistStateToStorage();
+        }
+      }
+
+      function autoSaveNote(textarea) {
+        const icao = textarea.getAttribute("data-icao");
+        const type = textarea.getAttribute("data-type");
+        const idx = textarea.getAttribute("data-idx");
+        const noteValue = textarea.value;
+
+        const airport = appState.airports.find((a) => a.ICAO === icao);
+        if (airport) {
+          if (!airport.colorState) {
+            airport.colorState = { runways: {}, approaches: {}, runwayNotes: {}, approachNotes: {} };
+          }
+          if (type === "runway")
+            airport.colorState.runwayNotes[idx] = noteValue;
+          if (type === "approach")
+            airport.colorState.approachNotes[idx] = noteValue;
 
           persistStateToStorage();
         }
@@ -712,12 +771,21 @@
         tags.forEach((tag) => {
           tag.classList.remove("tag-yellow", "tag-red");
           tag.classList.add("tag-green");
+          
+          // Hide associated textareas
+          const container = tag.parentElement;
+          const textarea = container.querySelector('.tag-note');
+          if (textarea) {
+              textarea.classList.remove('visible');
+          }
         });
 
         const airport = appState.airports.find((a) => a.ICAO === icao);
-        if (airport) {
-          airport.colorState = { runways: {}, approaches: {} };
-          persistStateToStorage(); // Auto-save after reset
+        if (airport && airport.colorState) {
+          // Reset colors, but explicitly preserve existing notes in storage
+          airport.colorState.runways = {};
+          airport.colorState.approaches = {};
+          persistStateToStorage();
         }
       }
 
