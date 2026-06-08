@@ -818,6 +818,30 @@
       ]
     },
     {
+      "ICAO": "RJAA",
+      "Name": "Narita INTL",
+      "Runways": ["16L-34R 2500x60", "16R-34L 4000x60"],
+      "Available_Approaches": [
+        {
+          "RWY": "16L",
+          "APPs": ["ILS I", "RNP"]
+        },
+        {
+          "RWY": "16R",
+          "APPs": ["ILS 3", "VOR"]
+        },
+        {
+          "RWY": "34L",
+          "APPs": ["ILS I", "VOR"]
+        },
+        {
+          "RWY": "34R",
+          "APPs": ["ILS I", "RNP"]
+        }
+      ],
+      "NOTAMS": []
+    },
+    {
       "ICAO": "RJCC",
       "Name": "New Chitose",
       "Runways": ["01L-19R 3000x60", "01R-19L 3000x60"],
@@ -898,6 +922,22 @@
       ]
     },
     {
+      "ICAO": "RJGG",
+      "Name": "Chubu Centrair INTL",
+      "Runways": ["18-36 3500x60"],
+      "Available_Approaches": [
+        {
+          "RWY": "18",
+          "APPs": ["ILS II", "RNP", "VOR"]
+        },
+        {
+          "RWY": "36",
+          "APPs": ["ILS 3", "RNP", "VOR"]
+        }
+      ],
+      "NOTAMS": []
+    },
+    {
       "ICAO": "RJSS",
       "Name": "Sendai",
       "Runways": ["09-27 3000x45", "12-30 1200x45"],
@@ -970,11 +1010,6 @@
       ],
       "NOTAMS": [
         {
-          "Number": "J1112/26",
-          "Relation": "We are not authorized to use GBAS",
-          "End": "30 MAY 2026 - 21:00"
-        },
-        {
           "Number": "J1016/26-J1017/26",
           "Relation": "Many Lighting Systems U/S, Detail in Jepp",
           "End": "10 JUN 2026 - 15:00"
@@ -983,41 +1018,6 @@
           "Number": "J1022/26",
           "Relation": "Detail in Jepp",
           "End": "10 JUN 2026 - 15:00"
-        },
-        {
-          "Number": "J903/26",
-          "Relation": "ILS 16R U/S, time related",
-          "End": "31 MAY 2026 - 21:00"
-        },
-        {
-          "Number": "J904/26",
-          "Relation": "ILS 34L U/S, time related",
-          "End": "31 MAY 2026 - 21:00"
-        },
-        {
-          "Number": "J908/26",
-          "Relation": "ILS 23 U/S, time related",
-          "End": "30 MAY 2026 - 21:00"
-        },
-        {
-          "Number": "J957/26",
-          "Relation": "RWY 16R/34L CLSD, time related",
-          "End": "31 MAY 2026 - 21:00"
-        },
-        {
-          "Number": "J960/26",
-          "Relation": "RWY 05/23 CLSD, time related",
-          "End": "30 MAY 2026 - 21:00"
-        },
-        {
-          "Number": "J905/26",
-          "Relation": "ILS 22 U/S, time related",
-          "End": "31 MAY 2026 - 21:00"
-        },
-        {
-          "Number": "J958/26",
-          "Relation": "RWY 04/22 CLSD, time related",
-          "End": "31 MAY 2026 - 21:00"
         },
         {
           "Number": "J922/26",
@@ -1117,16 +1117,6 @@
         }
       ],
       "NOTAMS": [
-        {
-          "Number": "A988/26",
-          "Relation": "ILS 07R NA, time related",
-          "End": "19 MAY 2026 - 23:59"
-        },
-        {
-          "Number": "A987",
-          "Relation": "ILS 25L NA, time related",
-          "End": "19 MAY 2026 - 23:59"
-        },
         {
           "Number": "A660/26",
           "Relation": "",
@@ -1239,16 +1229,6 @@
           "End": "01 JAN 2038 - 00:00"
         },
         {
-          "Number": "A2167/26",
-          "Relation": "Time related, 13 nm W of KPDX",
-          "End": "17 MAY 2026 - 23:59"
-        },
-        {
-          "Number": "A2418/26",
-          "Relation": "Western Washington and Northwestern Oregon",
-          "End": "25 MAY 2026 - 16:00"
-        },
-        {
           "Number": "A2362/26 A2391/26",
           "Relation": "100 nm W of KSEA",
           "End": ""
@@ -1257,11 +1237,6 @@
           "Number": "A2396/26",
           "Relation": "MOA = Military Operations Area, over Olympic Peninsula",
           "End": ""
-        },
-        {
-          "Number": "A476/26",
-          "Relation": "Deep in center of USA, on Southern part",
-          "End": "25 MAY 2026 - 23:59"
         },
         {
           "Number": "A46/22",
